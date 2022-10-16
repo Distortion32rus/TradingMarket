@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>agreements list</title>
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+<a href="agreements/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+<table class="table table-dark table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Organization</th>
+        <th scope="col">Counterparty</th>
+        <th scope="col">Deferment of payment</th>
+        <th scope="col">Min first order</th>
+        <th scope="col">Min second order</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="agreement : ${agreements}">
+        <th th:text="${agreement.getId()}">Id</th>
+        <td th:text="${agreement.getOrganization().geName()}">Organization</td>
+        <td th:text="${agreement.getCounterparty().getName()}">Counterparty</td>
+        <td th:text="${agreement.getDefermentOfPayment()}">Deferment of payment</td>
+        <td th:text="${agreement.getMinFirstOrderAmoung()}">Min first order amoung</td>
+        <td th:text="${agreement.getMinSecondaryOrderAmoung()}">Min second order amoung</td>
+
+        <td th:href="@{/agreements/{id}(id=${agreement.getId()})}">Edit</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

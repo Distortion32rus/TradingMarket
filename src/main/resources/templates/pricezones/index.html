@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+    <a href="pricezones/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr th:each="pricezone : ${priceZones}">
+            <th scope="row" th:text="${pricezone.getId()}">Price zone id</th>
+            <td th:text="${pricezone.getName()}">Price zone name</td>
+            <td th:text="${pricezone.getDescription()}">Price zone description</td>
+            <td th:href="@{/pricezones/{id}(id=${pricezone.getId()})}">Edit</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

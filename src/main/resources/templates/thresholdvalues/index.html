@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body>
+<div>Threshold Values list</div>
+<div th:each="thresholdvalue : ${thresholdvalues}">
+    <b th:text="${thresholdvalue.getId()}">Threshold Value id</b>
+    <b th:text="${thresholdvalue.getName()}">Threshold Value name</b>
+    <a th:href="@{/thresholdvalues/{id}(id=${thresholdvalue.getId()})}">Перейти</a>
+</div>
+</body>
+</html>

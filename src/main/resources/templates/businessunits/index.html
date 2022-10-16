@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+
+<body class="p-3 mb-2 bg-dark text-white">
+    <a href="businessunits/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="businessunit : ${businessUnits}">
+            <th th:text="${businessunit.getId()}">business unit  id</th>
+            <td th:text="${businessunit.getName()}">business unit name</td>
+            <td th:text="${businessunit.getDescription()}">business unit description</td>
+            <td th:href="@{/businessunits/{id}(id=${businessunit.getId()})}">Edit</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+<a href="nomenclatures/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+<table class="table table-dark table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Assortment plan</th>
+        <th scope="col">Edit</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each="nomenclature : ${nomenclatures}">
+        <th th:text="${nomenclature.getId()}"> id</th>
+        <td th:text="${nomenclature.getName()}">name</td>
+        <td th:text="${nomenclature.getAssortmentPlan().getName()}">assortmentplans name</td>
+        <td th:href="@{/nomenclatures/{id}(id=${nomenclature.getId()})}">Edit</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

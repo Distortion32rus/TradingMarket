@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body>
+<div>
+    <form th:method="POST" th:action="@{/thresholdvalues}" th:object="${thresholdvalue}">
+        <label for="name">Enter name</label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <input type="submit" value="Create!"/>
+    </form>
+</div>
+</body>>
+</html>>
