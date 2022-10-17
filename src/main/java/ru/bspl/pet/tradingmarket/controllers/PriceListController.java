@@ -4,7 +4,6 @@ package ru.bspl.pet.tradingmarket.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +17,12 @@ import ru.bspl.pet.tradingmarket.services.PriceZoneService;
 import ru.bspl.pet.tradingmarket.utils.PriseListNotCreatedException;
 
 import javax.validation.Valid;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
-@Controller
-@RequestMapping("/pricelist")
+@RestController
+@RequestMapping("/pricelists")
 public class PriceListController {
 
     private final PriceListService priceListService;
@@ -38,7 +37,6 @@ public class PriceListController {
         this.counterpartsNomenclatureService = counterpartsNomenclatureService;
         this.priceZoneService = priceZoneService;
     }
-
 
     @PostMapping()
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid PriceListDTO priceListDTO , BindingResult bindingResult){
@@ -64,26 +62,43 @@ public class PriceListController {
     private PriceList convertToPriceList(PriceListDTO priceListDTO) {
         PriceList priceList = new PriceList();
 
-        priceList.setPriceZone(priceZoneService.findOne(priceListDTO.getPriceZoneId()));
-        priceList.setCounterparty(counterpartyService.findOne(priceListDTO.getCounterpartyId()));
-        priceList.setCounterpartsNomenclature(counterpartsNomenclatureService.findOne(priceListDTO.getCounterpartsNomenclatureId()));
         priceList.setCounterpartysPrice(priceListDTO.getCounterpartysPrice());
         priceList.setMultiplicityOf(priceListDTO.getMultiplicityOf());
-        priceList.setShelfLife(new Timestamp(priceListDTO.getShelfLife().getTime()));
+        priceList.setShelfLife(priceListDTO.getShelfLife());
         priceList.setCounterpartysStock(priceListDTO.getCounterpartysStock());
-        priceList.setId(new PriceListId(priceList.getPriceZone(), priceList.getCounterparty(),
-                priceList.getCounterpartsNomenclature()));
+        priceList.setId(new PriceListId(priceZoneService.findOne(priceListDTO.getPriceZoneId()),
+                counterpartyService.findOne(priceListDTO.getCounterpartyId()),
+                counterpartsNomenclatureService.findOne(priceListDTO.getCounterpartsNomenclatureId())));
 
         return priceList;
     }
 
-    @GetMapping()
-    public List<PriceList> getPrices(){
-        return priceListService.findAll();
+    private PriceListDTO convertToPriceListDTO(PriceList priceList) {
+        PriceListDTO priceListDTO = new PriceListDTO();
+
+        priceListDTO.setPriceZoneId(priceList.getId().getPriceZone().getId());
+        priceListDTO.setCounterpartsNomenclatureId(priceList.getId().getCounterpartsNomenclature().getId());
+        priceListDTO.setCounterpartyId(priceList.getId().getCounterparty().getId());
+        priceListDTO.setCounterpartysPrice(priceList.getCounterpartysPrice());
+        priceListDTO.setShelfLife(priceList.getShelfLife());
+        priceListDTO.setMultiplicityOf(priceList.getMultiplicityOf());
+
+        return priceListDTO;
     }
 
-   /* @ExceptionHandler
-    private ResponseEntity<>
-*/
+
+
+    @GetMapping()
+    public List<PriceListDTO> getPrices(){
+        List<PriceListDTO> priceListDTO = new ArrayList<>();
+
+        for(PriceList pl: priceListService.findAll()) {
+            priceListDTO.add(convertToPriceListDTO(pl));
+        }
+
+        return priceListDTO;
+    }
+
+
 
 }

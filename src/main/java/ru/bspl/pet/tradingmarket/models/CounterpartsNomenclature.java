@@ -1,8 +1,8 @@
 package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @SequenceGenerator(name="COUNTERPARTY_NOMENCLATURE", sequenceName="COUNTERPARTY_NOMENCLATURE_GENERATOR")
@@ -20,8 +20,8 @@ public class CounterpartsNomenclature {
     @JoinColumn(name = "nomenclature_id")
     private Nomenclature nomenclature;
 
-    @OneToMany(mappedBy = "counterpartsNomenclature", cascade = CascadeType.ALL)
-    private List<PriceList> priceLists;
+    @OneToMany(mappedBy = "counterpartsNomenclature", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<PriceList> priceLists;
 
     public Long getId() {
         return id;
@@ -29,6 +29,11 @@ public class CounterpartsNomenclature {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public Set<PriceList> getPriceLists() {
+        return priceLists;
     }
 
     public String getName() {

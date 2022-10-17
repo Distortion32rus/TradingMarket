@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @SequenceGenerator(name="COUNTERPARTY", sequenceName="COUNTERPARTY_GENERATOR")
@@ -12,7 +13,6 @@ public class Counterparty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="COUNTERPARTY")
-
     private Long id;
 
     private String name;
@@ -21,8 +21,14 @@ public class Counterparty {
     @OneToMany(mappedBy = "counterparty", cascade = CascadeType.ALL)
     private List<Agreement> agreements;
 
-    @OneToMany(mappedBy = "counterparty", cascade = CascadeType.ALL)
-    private List<PriceList> priceLists;
+
+    @OneToMany(mappedBy = "counterparty", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<PriceList> priceLists;
+
+
+    public Set<PriceList> getPriceLists() {
+        return priceLists;
+    }
 
     public Long getId() {
         return id;

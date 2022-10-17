@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body>
+<div>
+    <form th:method="POST" th:action="@{/pricelists}" th:object="${pricelist}">
+        <label for="priceZone">Select price zone</label>
+        <select th:field="*{priceZone}" id="priceZone">
+            <option th:each="priceZone : ${priseZones}" th:value="${priceZone.getId()}" th:name="priceZone" th:text="${priceZone.getName()}"></option>
+        </select>
+        <label for="counterparty">Select counterparty</label>
+        <select th:field="*{counterparty}" id="counterparty">
+            <option th:each="counterparty : ${counterparts}" th:value="${counterparty.getId()}" th:name="counterparty" th:text="${counterparty.getName()}"></option>
+        </select>
+        <label for="counterpartsNomenclature">Select counterparts nomenclature</label>
+        <select th:field="*{counterpartsNomenclature}" id="counterpartsNomenclature">
+            <option th:each="counterpartsNomenclature : ${counterpartsNomenclatures}" th:value="${counterpartsNomenclature.getId()}" th:name="counterpartsNomenclature" th:text="${counterpartsNomenclature.getName()}"></option>
+        </select>
+        <label for="shelfLife">Enter shelf life</label>
+        <input type="date" th:field="*{shelfLife}" id="shelfLife"/>
+        <label for="multiplicityOf">Enter multiplicity</label>
+        <input type="text" th:field="*{multiplicityOf}" id="multiplicityOf"/>
+        <label for="counterpartysStock">Enter counterparts stock</label>
+        <input type="text" th:field="*{counterpartysStock}" id="counterpartysStock"/>
+        <input type="submit" value="Create!"/>
+    </form>
+</div>
+</body>
+</html>

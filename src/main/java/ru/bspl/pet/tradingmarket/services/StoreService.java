@@ -1,6 +1,7 @@
 package ru.bspl.pet.tradingmarket.services;
 
 
+import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +35,12 @@ public class StoreService {
 
     @Transactional
     public void save(Store store){
-        storesRepo.save(store);
+        try {
+            storesRepo.save(store);
+        }catch (ConversionNotSupportedException e){
+            e.printStackTrace();
+
+        }
     }
 
     @Transactional

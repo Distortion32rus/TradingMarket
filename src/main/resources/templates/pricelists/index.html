@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+<a href="pricelists/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+<table class="table table-dark table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Price zone</th>
+    <th scope="col">Counterparty</th>
+    <th scope="col">Nomenclature</th>
+    <th scope="col">Price</th>
+    <th scope="col">Date of expiration</th>
+    <th scope="col">Multiplicity</th>
+    <th scope="col">Stock</th>
+  </tr>
+  </thead>
+  <tbody >
+  <tr th:each="priceList : ${priceLists}">
+    <td th:text="${priceList.getPriceZone().getName()}">Price zone</td>
+    <td th:text="${priceList.getCounterparty().getName()}">Counterparty</td>
+    <td th:text="${priceList.getCounterpartsNomenclature().getName()}">Nomenclature</td>
+    <td th:text="${priceList.setCounterpartysPrice()}">Price </td>
+    <td th:text="${priceList.getShelfLife()}">Date of expiration</td>
+    <td th:text="${priceList.getCounterpartysStock()}">Multiplicity</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+
+
+</html>
