@@ -5,13 +5,13 @@ package ru.bspl.pet.tradingmarket.models;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @SequenceGenerator(name="PRICE_ZONE", sequenceName="PRICE_ZONE_GENERATOR")
 public class PriceZone {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PRICE_ZONE")
-
     private Long id;
 
     private String name;
@@ -20,8 +20,10 @@ public class PriceZone {
     @OneToMany(mappedBy = "priceZone", cascade = CascadeType.ALL)
     private List<Store> stores;
 
-    @OneToMany(mappedBy = "priceZone", cascade = CascadeType.ALL)
-    private List<PriceList> priceLists;
+    @OneToMany(mappedBy = "priceZone", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<PriceList> priceLists;
+
+
 
     public Long getId() {
         return id;
@@ -45,6 +47,11 @@ public class PriceZone {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public Set<PriceList> getPriceLists() {
+        return priceLists;
     }
 
     public PriceZone(String name, String description) {

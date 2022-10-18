@@ -1,6 +1,5 @@
 package ru.bspl.pet.tradingmarket.services;
 
-import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,14 +13,11 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 public class PriceListService {
-
     private final PriceListRepo priceListRepo;
-
     @Autowired
     public PriceListService(PriceListRepo priceListRepo) {
         this.priceListRepo = priceListRepo;
     }
-
     public List<PriceList> findAll(){
         return priceListRepo.findAll();
     }

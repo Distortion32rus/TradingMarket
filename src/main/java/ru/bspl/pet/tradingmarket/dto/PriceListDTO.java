@@ -1,9 +1,5 @@
 package ru.bspl.pet.tradingmarket.dto;
 
-import ru.bspl.pet.tradingmarket.models.CounterpartsNomenclature;
-import ru.bspl.pet.tradingmarket.models.Counterparty;
-import ru.bspl.pet.tradingmarket.models.PriceZone;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
