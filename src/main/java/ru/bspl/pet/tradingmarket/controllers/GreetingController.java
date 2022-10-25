@@ -21,7 +21,11 @@ public class GreetingController {
     public String main(Map<String, Object> model){
         model.put("some", "main page");
         return "main";
+    }
 
+    @GetMapping("/admin")
+    public String adminPage(){
+        return "adminpage";
     }
 
 }
