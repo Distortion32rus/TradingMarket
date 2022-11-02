@@ -39,4 +39,9 @@ public class DemandService {
         demand.setId(demandId);
         demandRepo.save(demand);
     }
+
+   /* @Transactional
+    public void delete(Long id){
+        demandRepo.deleteById(id);
+    }*/
 }

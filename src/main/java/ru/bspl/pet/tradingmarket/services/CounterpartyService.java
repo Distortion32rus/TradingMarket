@@ -41,4 +41,9 @@ public class CounterpartyService {
         counterpartyRepo.save(counterparty);
     }
 
+    @Transactional
+    public void delete(Long id){
+        counterpartyRepo.deleteById(id);
+    }
+
 }

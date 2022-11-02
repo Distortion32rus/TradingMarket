@@ -3,10 +3,11 @@ package ru.bspl.pet.tradingmarket.models;
 import javax.persistence.*;
 
 @Entity
+@SequenceGenerator(name="STORE", sequenceName="STORE_GENERATOR")
 public class Store {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="STORE")
     private Long id;
     private String name;
     private String description;

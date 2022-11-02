@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.bspl.pet.tradingmarket.models.Agreement;
 import ru.bspl.pet.tradingmarket.models.Store;
 import ru.bspl.pet.tradingmarket.services.BusinessUnitService;
 import ru.bspl.pet.tradingmarket.services.OrganizationService;
@@ -51,6 +52,26 @@ public class StoresController {
     @PostMapping()
     public String add(@ModelAttribute("store") Store store){
         storeService.save(store);
+        return "redirect:/stores";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") Long id){
+        model.addAttribute("priseZones", priceZoneService.findAll());
+        model.addAttribute("businessUnits", businessUnitService.findAll());
+        model.addAttribute("organizations", organizationService.findAll());
+        model.addAttribute("store", storeService.findOne(id));
+        model.addAttribute("header", "Agreements-add new");
+        return "stores/edit";
+    }
+    @PostMapping("/{id}")
+    public String update(@ModelAttribute("store") Store store, @PathVariable("id") Long id){
+        storeService.update(id, store);
+        return "redirect:/stores";
+    }
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable("id") Long id){
+        storeService.delete(id);
         return "redirect:/stores";
     }
 

@@ -6,12 +6,16 @@
 </head>
 <body>
 <div>
-    <form th:method="POST" th:action="@{/businessunits}" th:object="${businessUnit}">
+    <form th:method="POST" th:action="@{/pricezones/{id}(id=${priceZone.getId()})}"  th:object="${priceZone}">
         <label for="name">Enter name</label>
         <input type="text" th:field="*{name}" id="name"/>
         <label for="description">Enter description</label>
         <input type="text" th:field="*{description}" id="description"/>
         <input type="submit" value="Create!"/>
+    </form>
+    <br>
+    <form th:method="DELETE" th:action="@{/pricezones/{id}/delete(id=${priceZone.getId()})}">
+        <input type="submit" value="Delete"/>
     </form>
 </div>
 </body>

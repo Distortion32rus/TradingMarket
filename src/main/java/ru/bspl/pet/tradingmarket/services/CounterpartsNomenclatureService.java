@@ -40,4 +40,9 @@ public class CounterpartsNomenclatureService {
         counterpartsNomenclature.setId(id);
         counterpartsNomenclatureRepo.save(counterpartsNomenclature);
     }
+
+    @Transactional
+    public void delete(Long id){
+        counterpartsNomenclatureRepo.deleteById(id);
+    }
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body>
+<div>
+  <form th:method="POST" th:action="@{/typesofassortmentplans/{id}(id=${typeOfAssortmentPlans.getId()})}" th:object="${typeOfAssortmentPlans}">
+    <label for="name">Enter name</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <input type="submit" value="Create!"/>
+  </form>
+  <br>
+  <form th:method="DELETE" th:action="@{/typesofassortmentplans/{id}/delete(id=${typeOfAssortmentPlans.getId()})}">
+    <input type="submit" value="Delete"/>
+  </form>
+</div>
+</body>
+</html>

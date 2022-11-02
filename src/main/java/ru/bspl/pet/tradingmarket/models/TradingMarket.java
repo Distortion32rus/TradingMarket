@@ -4,13 +4,14 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class TraidingMarket {
+@SequenceGenerator(name="TRADING_MARKET", sequenceName="TRADING_MARKET_GENERATOR")
+public class TradingMarket {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="TRADING_MARKET")
     private long id;
 
-    @OneToMany(mappedBy = "traidingMarket", cascade = CascadeType.ALL)
-    private List<TraidingMarketDistribution> traidingMarketDistributionList;
+    @OneToMany(mappedBy = "tradingMarket", cascade = CascadeType.ALL)
+    private List<TradingMarketDistribution> tradingMarketDistributionList;
 
     private String name;
     private double demandReplenishmentSumm, preOrderSumm;
@@ -19,7 +20,7 @@ public class TraidingMarket {
         return id;
     }
 
-    public TraidingMarket(String name) {
+    public TradingMarket(String name) {
         this.name = name;
     }
 
@@ -51,6 +52,6 @@ public class TraidingMarket {
         this.preOrderSumm = preOrderSumm;
     }
 
-    public TraidingMarket() {
+    public TradingMarket() {
     }
 }

@@ -24,10 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests()
+                .antMatchers("/pricelists/api").permitAll() //todo Настроить JWT
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/auth/login", "/auth/registration").permitAll()
+
                 .anyRequest().hasAnyRole("ADMIN", "USER")
-                .and()
+                .and().csrf().disable() //todo вернуть CSRF
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
                 .defaultSuccessUrl("/", true)
@@ -35,7 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login");
     }
-
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(personService).passwordEncoder(getPasswordEncoder());

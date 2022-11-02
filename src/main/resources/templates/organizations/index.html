@@ -12,7 +12,7 @@
         <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Description</th>
-        <th scope="col">Edit</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody >
@@ -20,7 +20,7 @@
         <th scope="row" th:text="${organization.getId()}">Price zone id</th>
         <td th:text="${organization.getName()}">Price zone name</td>
         <td th:text="${organization.getDescription()}">Price zone description</td>
-        <td th:href="@{/organizations/{id}(id=${organization.getId()})}">Edit</td>
+        <td><a th:href="@{/organizations/{id}/edit(id=${organization.getId()})}">Edit</a></td>
     </tr>
     </tbody>
 </table>

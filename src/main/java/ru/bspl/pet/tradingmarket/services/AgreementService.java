@@ -40,4 +40,9 @@ public class AgreementService {
         agreement.setId(id);
         agreementRepo.save(agreement);
     }
+
+    @Transactional
+    public void delete(Long id){
+        agreementRepo.deleteById(id);
+    }
 }

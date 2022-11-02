@@ -20,6 +20,10 @@ public class CounterpartsNomenclature {
     @JoinColumn(name = "nomenclature_id")
     private Nomenclature nomenclature;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "counterparty_id")
+    private Counterparty counterparty;
+
     @OneToMany(mappedBy = "counterpartsNomenclature", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<PriceList> priceLists;
 
@@ -58,6 +62,14 @@ public class CounterpartsNomenclature {
 
     public void setNomenclature(Nomenclature nomenclature) {
         this.nomenclature = nomenclature;
+    }
+
+    public Counterparty getCounterparty() {
+        return counterparty;
+    }
+
+    public void setCounterparty(Counterparty counterparty) {
+        this.counterparty = counterparty;
     }
 
     @Override

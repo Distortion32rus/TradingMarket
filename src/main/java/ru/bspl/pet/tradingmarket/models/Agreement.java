@@ -3,10 +3,11 @@ package ru.bspl.pet.tradingmarket.models;
 import javax.persistence.*;
 
 @Entity
+@SequenceGenerator(name="AGREEMENT", sequenceName="AGREEMENT_GENERATOR")
 public class Agreement {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AGREEMENT")
     private Long id;
 
     private int defermentOfPayment, minFirstOrderAmoung, minSecondaryOrderAmoung;

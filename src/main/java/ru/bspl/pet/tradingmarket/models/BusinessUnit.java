@@ -5,10 +5,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@SequenceGenerator(name="BUSINESS_UNIT", sequenceName="BUSINESS_UNIT_GENERATOR")
 public class BusinessUnit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="BUSINESS_UNIT")
     private Long id;
 
     private String name;

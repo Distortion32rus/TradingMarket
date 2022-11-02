@@ -49,4 +49,9 @@ public class StoreService {
         storesRepo.save(store);
     }
 
+    @Transactional
+    public void delete(Long id){
+        storesRepo.deleteById(id);
+    }
+
 }

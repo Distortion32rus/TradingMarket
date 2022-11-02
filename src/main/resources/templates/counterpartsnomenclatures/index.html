@@ -13,7 +13,8 @@
         <th scope="col">Name</th>
         <th scope="col">Multiplicity</th>
         <th scope="col">Nomenclature</th>
-        <th scope="col">Edit</th>
+        <th scope="col">Counterparty</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody >
@@ -22,7 +23,8 @@
         <td th:text="${counterpartsNomenclature.getName()}">name</td>
         <td th:text="${counterpartsNomenclature.getMultiplicityOf()}">MultiplicityOf</td>
         <td th:text="${counterpartsNomenclature.getNomenclature().getName()}">Nomenclature name</td>
-        <td th:href="@{/counterpartsnomenclatures/{id}(id=${counterpartsNomenclature.getId()})}">Edit</td>
+        <td th:text="${counterpartsNomenclature.getCounterparty().getName()}">Counterparty name</td>
+        <td><a th:href="@{/counterpartsnomenclatures/{id}/edit(id=${counterpartsNomenclature.getId()})}">Edit</a></td>
     </tr>
     </tbody>
 </table>

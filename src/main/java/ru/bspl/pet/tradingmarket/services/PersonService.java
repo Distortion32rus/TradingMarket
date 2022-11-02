@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.Person;
 import ru.bspl.pet.tradingmarket.repos.PersonRepo;
 import ru.bspl.pet.tradingmarket.security.PersonDetails;
@@ -31,6 +32,11 @@ public class PersonService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found!");
 
         return new PersonDetails(person.get());
+    }
+
+    @Transactional
+    public void delete(Long id){
+        personRepo.deleteById(id);
     }
 
 

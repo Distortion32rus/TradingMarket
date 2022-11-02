@@ -4,10 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@SequenceGenerator(name="THRESHOLD_VALUES", sequenceName="THRESHOLD_VALUES_GENERATOR")
 public class ThresholdValues {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="THRESHOLD_VALUES")
     private Long id;
 
     private String name;

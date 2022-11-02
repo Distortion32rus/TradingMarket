@@ -15,8 +15,12 @@
         <select th:field="*{nomenclature}" id="nomenclature">
             <option th:each="nomenclature : ${nomenclatures}" th:value="${nomenclature.getId()}" th:name="nomenclature" th:text="${nomenclature.getName()}"></option>
         </select>
+        <label for="counterparty">Select counterparty</label>
+        <select th:field="*{counterparty}" id="counterparty">
+            <option th:each="counterparty : ${counterparties}" th:value="${counterparty.getId()}" th:name="counterparty" th:text="${counterparty.getName()}"></option>
+        </select>
         <input type="submit" value="Create!"/>
     </form>
 </div>
 </body>
-</html>>
+</html>

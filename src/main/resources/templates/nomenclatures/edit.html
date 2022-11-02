@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body>
+<div>
+  <form th:method="POST"  th:action="@{/nomenclatures/{id}(id=${nomenclature.getId()})}" th:object="${nomenclature}">
+    <label for="name">Enter name</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <label for="assortmentPlan">Select assortment plan</label>
+    <select th:field="*{assortmentPlan}" id="assortmentPlan">
+      <option th:each="assortmentPlan : ${assortmentPlans}" th:value="${assortmentPlan.getId()}" th:name="assortmentPlan" th:text="${assortmentPlan.getName()}"></option>
+    </select>
+    <input type="submit" value="Create!"/>
+  </form>
+  <br>
+  <form th:method="DELETE" th:action="@{/nomenclatures/{id}/delete(id=${nomenclature.getId()})}">
+    <input type="submit" value="Delete"/>
+  </form>
+</div>
+</body>
+</html>

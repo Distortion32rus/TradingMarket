@@ -40,4 +40,9 @@ public class TypeOfAssortmentPlansService {
         typeOfAssortmentPlans.setId(id);
         typeOfAssortmentPlansRepo.save(typeOfAssortmentPlans);
     }
+
+    @Transactional
+    public void delete(Long id){
+        typeOfAssortmentPlansRepo.deleteById(id);
+    }
 }

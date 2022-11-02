@@ -38,10 +38,10 @@ public class PriceListController {
         this.priceZoneService = priceZoneService;
     }
 
-    @PostMapping()
-    public ResponseEntity<HttpStatus> create(@RequestBody @Valid PriceListDTO priceListDTO , BindingResult bindingResult){
+    @PostMapping("/api")
+    public ResponseEntity<HttpStatus> create(@RequestBody @Valid ArrayList<PriceListDTO> priceListDTO , BindingResult bindingResult){
 
-        if(bindingResult.hasErrors()){
+        /*if(bindingResult.hasErrors()){
             StringBuilder errorMessage = new StringBuilder();
 
             List<FieldError> errorList = bindingResult.getFieldErrors();
@@ -51,10 +51,12 @@ public class PriceListController {
             }
 
             throw new PriseListNotCreatedException(errorMessage.toString());
-        }
+        }*/
 
-        PriceList pl = convertToPriceList(priceListDTO);
-        priceListService.save(pl);
+        for (PriceListDTO lpDTO: priceListDTO ) {
+            PriceList pl = convertToPriceList(lpDTO);
+            priceListService.save(pl);
+        }
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -72,7 +74,6 @@ public class PriceListController {
 
         return priceList;
     }
-
     private PriceListDTO convertToPriceListDTO(PriceList priceList) {
         PriceListDTO priceListDTO = new PriceListDTO();
 
@@ -80,6 +81,7 @@ public class PriceListController {
         priceListDTO.setCounterpartsNomenclatureId(priceList.getId().getCounterpartsNomenclature().getId());
         priceListDTO.setCounterpartyId(priceList.getId().getCounterparty().getId());
         priceListDTO.setCounterpartysPrice(priceList.getCounterpartysPrice());
+        priceListDTO.setCounterpartysStock(priceList.getCounterpartysStock());
         priceListDTO.setShelfLife(priceList.getShelfLife());
         priceListDTO.setMultiplicityOf(priceList.getMultiplicityOf());
 

@@ -12,7 +12,7 @@
         <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Type of AP</th>
-        <th scope="col">Edit</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody >
@@ -20,7 +20,7 @@
         <th th:text="${assortmentplan.getId()}">typeofassortmentplans  id</th>
         <td th:text="${assortmentplan.getName()}">typeofassortmentplans name</td>
         <td th:text="${assortmentplan.getTypeOfAssortmentPlans().getName()}">typeofassortmentplans name</td>
-        <td th:href="@{/assortmentplans/{id}(id=${assortmentplan.getId()})}">Edit</td>
+        <td><a th:href="@{/assortmentplans/{id}/edit(id=${assortmentplan.getId()})}">Edit</a></td>
     </tr>
     </tbody>
 </table>

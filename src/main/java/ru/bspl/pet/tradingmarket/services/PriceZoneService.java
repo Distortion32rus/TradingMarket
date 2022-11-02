@@ -42,4 +42,8 @@ public class PriceZoneService {
         priceZone.setId(id);
         priceZoneRepo.save(priceZone);
     }
+    @Transactional
+    public void delete(Long id){
+        priceZoneRepo.deleteById(id);
+    }
 }

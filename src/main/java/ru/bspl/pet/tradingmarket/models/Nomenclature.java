@@ -4,10 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@SequenceGenerator(name="NOMENCLATURE", sequenceName="NOMENCLATURE_GENERATOR")
 public class Nomenclature {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="NOMENCLATURE")
     private Long id;
 
     private String name;

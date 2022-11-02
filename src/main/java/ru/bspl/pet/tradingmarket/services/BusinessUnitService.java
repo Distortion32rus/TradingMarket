@@ -39,4 +39,9 @@ public class BusinessUnitService {
         businessUnit.setId(id);
         businessUnitRepo.save(businessUnit);
     }
+
+    @Transactional
+    public void delete(Long id){
+        businessUnitRepo.deleteById(id);
+    }
 }

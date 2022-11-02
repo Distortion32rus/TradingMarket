@@ -40,4 +40,9 @@ public class AssortmentPlanService {
         assortmentPlan.setId(id);
         assortmentPlanRepo.save(assortmentPlan);
     }
+
+    @Transactional
+    public void delete(Long id){
+        assortmentPlanRepo.deleteById(id);
+    }
 }

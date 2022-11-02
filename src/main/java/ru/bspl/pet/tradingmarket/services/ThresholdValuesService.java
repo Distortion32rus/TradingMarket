@@ -40,4 +40,9 @@ public class ThresholdValuesService {
         thresholdValues.setId(id);
         thresholdValuesRepo.save(thresholdValues);
     }
+
+    @Transactional
+    public void delete(Long id){
+        thresholdValuesRepo.deleteById(id);
+    }
 }

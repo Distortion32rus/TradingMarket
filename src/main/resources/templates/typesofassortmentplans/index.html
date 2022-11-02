@@ -11,14 +11,14 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
-            <th scope="col">Edit</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody >
         <tr th:each="typeofassortmentplans : ${typesofassortmentplans}">
             <th th:text="${typeofassortmentplans.getId()}">typeofassortmentplans  id</th>
             <td th:text="${typeofassortmentplans.getName()}">typeofassortmentplans name</td>
-            <td th:href="@{/typesofassortmentplans/{id}(id=${typeofassortmentplans.getId()})}">Edit</td>
+            <td> <a th:href="@{/typesofassortmentplans/{id}/edit(id=${typeofassortmentplans.getId()})}">Edit</a></td>
         </tr>
         </tbody>
     </table>

@@ -42,4 +42,9 @@ public class NomenclatureService {
         nomenclature.setId(id);
         nomenclatureRepo.save(nomenclature);
     }
+
+    @Transactional
+    public void delete(Long id){
+        nomenclatureRepo.deleteById(id);
+    }
 }

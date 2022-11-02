@@ -41,4 +41,8 @@ public class OrganizationService {
         organization.setId(id);
         organizationRepo.save(organization);
     }
+    @Transactional
+    public void delete(Long id){
+        organizationRepo.deleteById(id);
+    }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body>
+<div>
+  <form th:method="POST" th:action="@{/agreements/{id}(id=${agreement.getId()})}" th:object="${agreement}">
+    <label for="organization">Select organization</label>
+    <select th:field="*{organization}" id="organization">
+      <option th:each="organization : ${organizations}" th:value="${organization.getId()}" th:name="organization" th:text="${organization.getName()}"></option>
+    </select>
+    <label for="counterparty">Select counterparty</label>
+    <select th:field="*{counterparty}" id="counterparty">
+      <option th:each="counterparty : ${counterparties}" th:value="${counterparty.getId()}" th:name="counterparty" th:text="${counterparty.getName()}"></option>
+    </select>
+    <label for="defermentOfPayment">Enter deferment Of Payment</label>
+    <input type="text" th:field="*{defermentOfPayment}" id="defermentOfPayment"/>
+    <label for="minFirstOrderAmoung">Enter minFirstOrderAmoung</label>
+    <input type="text" th:field="*{minFirstOrderAmoung}" id="minFirstOrderAmoung"/>
+    <label for="minSecondaryOrderAmoung">Enter minSecondaryOrderAmoung</label>
+    <input type="text" th:field="*{minSecondaryOrderAmoung}" id="minSecondaryOrderAmoung"/>
+    <input type="submit" value="Create!"/>
+  </form>
+  <br>
+  <form th:method="DELETE" th:action="@{/agreements/{id}/delete(id=${agreement.getId()})}">
+    <input type="submit" value="Delete"/>
+  </form>
+</div>
+</body>
+</html>

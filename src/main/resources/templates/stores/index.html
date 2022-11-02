@@ -28,7 +28,7 @@
         <td th:text="${store.getPriceZone().getName()}">Store price zone</td>
         <td th:text="${store.getBusinessUnit().getName()}">Store business unit</td>
         <td th:text="${store.getOrganization().getName()}">Store organization</td>
-        <td th:href="@{/stores/{id}(id=${store.getId()})}">Edit</td>
+        <td><a th:href="@{/stores/{id}/edit(id=${store.getId()})}">Edit</a></td>
     </tr>
     </tbody>
 </table>

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body>
+<div>
+  <form th:method="PATCH" th:action="@{/organizations/{id}(id=${organization.getId()})}" th:object="${organization}">
+    <label for="name">Enter name</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <label for="description">Enter description</label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <input type="submit" value="Update!"/>
+  </form>
+  <br>
+  <form th:method="DELETE" th:action="@{/organizations/{id}/delete(id=${organization.getId()})}">
+    <input type="submit" value="Delete"/>
+  </form>
+</div>
+</body>
+</html>

@@ -41,4 +41,9 @@ public class ThresholdValuesTableService {
         thresholdValuesTable.setId(id);
         thresholdValuesTableRepo.save(thresholdValuesTable);
     }
+
+    @Transactional
+    public void delete(Long id){
+        thresholdValuesTableRepo.deleteById(id);
+    }
 }

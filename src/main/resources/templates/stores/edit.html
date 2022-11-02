@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body>
+<div>
+    <form th:method="POST" th:action="@{/stores/{id}(id=${store.getId()})}"  th:object="${store}">
+        <label for="name">Enter name</label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <label for="description">Enter description</label>
+        <input type="text" th:field="*{description}" id="description"/>
+        <label for="priority">Enter priority</label>
+        <input type="text" th:field="*{priority}" id="priority"/>
+        <label for="priceZone">Select price zone</label>
+        <select th:field="*{priceZone}" id="priceZone">
+            <option th:each="priceZone : ${priseZones}" th:value="${priceZone.getId()}" th:name="priceZone" th:text="${priceZone.getName()}"></option>
+        </select>
+        <label for="businessUnit">Select business unit</label>
+        <select th:field="*{businessUnit}" id="businessUnit">
+            <option th:each="businessUnit : ${businessUnits}" th:value="${businessUnit.getId()}" th:name="businessUnit" th:text="${businessUnit.getName()}"></option>
+        </select>
+        <label for="organization">Select organization</label>
+        <select th:field="*{organization}" id="organization">
+            <option th:each="organization : ${organizations}" th:value="${organization.getId()}" th:name="organization" th:text="${organization.getName()}"></option>
+        </select>
+        <input type="submit" value="Create!"/>
+    </form>
+    <br>
+    <form th:method="DELETE" th:action="@{/stores/{id}/delete(id=${store.getId()})}" >
+        <input type="submit" value="Delete"/>
+    </form>
+</div>
+</body>
+</html>

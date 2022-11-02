@@ -4,14 +4,15 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class TraidingMarketDistribution {
+@SequenceGenerator(name="TRADING_MARKET_DISTRIBUTION", sequenceName="TRADING_MARKET_DISTRIBUTION_GENERATOR")
+public class TradingMarketDistribution {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="TRADING_MARKET_DISTRIBUTION")
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "traiding_market_id")
-    private TraidingMarket traidingMarket;
+    @JoinColumn(name = "trading_market_id")
+    private TradingMarket tradingMarket;
 
     @ManyToOne
     @JoinColumn(name = "store_id")
@@ -202,11 +203,11 @@ public class TraidingMarketDistribution {
         this.store = store;
     }
 
-    public TraidingMarket getTraidingMarket() {
-        return traidingMarket;
+    public TradingMarket getTradingMarket() {
+        return tradingMarket;
     }
 
-    public void setTraidingMarket(TraidingMarket traidingMarket) {
-        this.traidingMarket = traidingMarket;
+    public void setTradingMarket(TradingMarket tradingMarket) {
+        this.tradingMarket = tradingMarket;
     }
 }

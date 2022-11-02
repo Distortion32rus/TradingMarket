@@ -12,7 +12,7 @@
         <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Assortment plan</th>
-        <th scope="col">Edit</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody >
@@ -20,7 +20,7 @@
         <th th:text="${nomenclature.getId()}"> id</th>
         <td th:text="${nomenclature.getName()}">name</td>
         <td th:text="${nomenclature.getAssortmentPlan().getName()}">assortmentplans name</td>
-        <td th:href="@{/nomenclatures/{id}(id=${nomenclature.getId()})}">Edit</td>
+        <td><a th:href="@{/nomenclatures/{id}/edit(id=${nomenclature.getId()})}">Edit</a></td>
     </tr>
     </tbody>
 </table>

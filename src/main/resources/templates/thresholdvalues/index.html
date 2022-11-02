@@ -9,7 +9,7 @@
 <div th:each="thresholdvalue : ${thresholdvalues}">
     <b th:text="${thresholdvalue.getId()}">Threshold Value id</b>
     <b th:text="${thresholdvalue.getName()}">Threshold Value name</b>
-    <a th:href="@{/thresholdvalues/{id}(id=${thresholdvalue.getId()})}">Перейти</a>
+    <td><a th:href="@{/thresholdvalues/{id}/edit(id=${thresholdvalue.getId()})}">Edit</a></td>
 </div>
 </body>
 </html>

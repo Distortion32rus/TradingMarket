@@ -16,19 +16,18 @@
         <th scope="col">Deferment of payment</th>
         <th scope="col">Min first order</th>
         <th scope="col">Min second order</th>
-
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="agreement : ${agreements}">
         <th th:text="${agreement.getId()}">Id</th>
-        <td th:text="${agreement.getOrganization().geName()}">Organization</td>
+        <td th:text="${agreement.getOrganization().getName()}">Organization</td>
         <td th:text="${agreement.getCounterparty().getName()}">Counterparty</td>
         <td th:text="${agreement.getDefermentOfPayment()}">Deferment of payment</td>
         <td th:text="${agreement.getMinFirstOrderAmoung()}">Min first order amoung</td>
         <td th:text="${agreement.getMinSecondaryOrderAmoung()}">Min second order amoung</td>
-
-        <td th:href="@{/agreements/{id}(id=${agreement.getId()})}">Edit</td>
+        <td><a th:href="@{/agreements/{id}/edit(id=${agreement.getId()})}">Edit</a></td>
     </tr>
     </tbody>
 </table>

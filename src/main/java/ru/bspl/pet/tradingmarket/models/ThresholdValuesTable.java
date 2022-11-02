@@ -3,10 +3,11 @@ package ru.bspl.pet.tradingmarket.models;
 import javax.persistence.*;
 
 @Entity
+@SequenceGenerator(name="THRESHOLD_VALUES_TABLE", sequenceName="THRESHOLD_VALUES_TABLE_GENERATOR")
 public class ThresholdValuesTable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="THRESHOLD_VALUES_TABLE")
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "threshold_values_id")

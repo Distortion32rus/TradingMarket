@@ -11,7 +11,7 @@
     <b th:text="${thresholdvalue.getMinPrice()}">Threshold Value name</b>
     <b th:text="${thresholdvalue.getMaxPrice()}">Threshold Value name</b>
     <b th:text="${thresholdvalue.getDeviation()}">Threshold Value name</b>
-    <a th:href="@{/thresholdvaluestable/{id}(id=${thresholdvalue.getId()})}">Перейти</a>
+    <td><a th:href="@{/thresholdvaluestable/{id}(id=${thresholdvalue.getId()})}">Edit</a></td>
 </div>
 </body>
 </html>
