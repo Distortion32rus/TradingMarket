@@ -24,12 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests()
-                .antMatchers("/pricelists/api").permitAll() //todo Настроить JWT
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/auth/login", "/auth/registration").permitAll()
-
+                .antMatchers("/pricelists/api","/demand/api","/auth/login", "/auth/registration").permitAll()
                 .anyRequest().hasAnyRole("ADMIN", "USER")
-                .and().csrf().disable() //todo вернуть CSRF
+                .and().csrf().disable()                                            //todo вернуть CSRF
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
                 .defaultSuccessUrl("/", true)

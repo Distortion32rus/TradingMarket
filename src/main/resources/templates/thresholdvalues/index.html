@@ -4,12 +4,25 @@
     <meta charset="UTF-8" />
     <th:block th:insert="common.html :: header"></th:block>
 </head>
-<body>
-<div>Threshold Values list</div>
-<div th:each="thresholdvalue : ${thresholdvalues}">
-    <b th:text="${thresholdvalue.getId()}">Threshold Value id</b>
-    <b th:text="${thresholdvalue.getName()}">Threshold Value name</b>
-    <td><a th:href="@{/thresholdvalues/{id}/edit(id=${thresholdvalue.getId()})}">Edit</a></td>
+<body class="text-bg-dark p-3">
+<div>
+    <a href="thresholdvalues/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr th:each="thresholdvalue : ${thresholdvalues}">
+            <th scope="row" th:text="${thresholdvalue.getId()}">Store id</th>
+            <td th:text="${thresholdvalue.getName()}">Store name</td>
+            <td><a th:href="@{/thresholdvalues/{id}/edit(id=${thresholdvalue.getId()})}">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

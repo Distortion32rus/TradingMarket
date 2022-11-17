@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <th:block th:insert="common.html :: header"></th:block>
 </head>
-<body>
+<body class="text-bg-dark p-3">
 <div>
   <form th:method="POST" th:action="@{/typesofassortmentplans/{id}(id=${typeOfAssortmentPlans.getId()})}" th:object="${typeOfAssortmentPlans}">
     <label for="name">Enter name</label>

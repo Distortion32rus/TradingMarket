@@ -4,12 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.bspl.pet.tradingmarket.models.Agreement;
 import ru.bspl.pet.tradingmarket.models.Store;
-import ru.bspl.pet.tradingmarket.services.BusinessUnitService;
-import ru.bspl.pet.tradingmarket.services.OrganizationService;
-import ru.bspl.pet.tradingmarket.services.PriceZoneService;
-import ru.bspl.pet.tradingmarket.services.StoreService;
+import ru.bspl.pet.tradingmarket.services.*;
 
 @Controller
 @RequestMapping("/stores")
@@ -23,13 +19,15 @@ public class StoresController {
     private final PriceZoneService priceZoneService;
 
     private final OrganizationService organizationService;
+    private final ThresholdValuesService thresholdValuesService;
 
     @Autowired
-    public StoresController(StoreService storeService, BusinessUnitService businessUnitService, PriceZoneService priceZoneService, OrganizationService organizationService) {
+    public StoresController(StoreService storeService, BusinessUnitService businessUnitService, PriceZoneService priceZoneService, OrganizationService organizationService, ThresholdValuesService thresholdValuesService) {
         this.storeService = storeService;
         this.businessUnitService = businessUnitService;
         this.priceZoneService = priceZoneService;
         this.organizationService = organizationService;
+        this.thresholdValuesService = thresholdValuesService;
     }
 
     @GetMapping()
@@ -45,6 +43,7 @@ public class StoresController {
         model.addAttribute("priseZones", priceZoneService.findAll());
         model.addAttribute("businessUnits", businessUnitService.findAll());
         model.addAttribute("organizations", organizationService.findAll());
+        model.addAttribute("thresholdValues", thresholdValuesService.findAll());
         model.addAttribute("header", "stores  add new");
         return "stores/new";
     }
@@ -60,6 +59,7 @@ public class StoresController {
         model.addAttribute("priseZones", priceZoneService.findAll());
         model.addAttribute("businessUnits", businessUnitService.findAll());
         model.addAttribute("organizations", organizationService.findAll());
+        model.addAttribute("thresholdValues", thresholdValuesService.findAll());
         model.addAttribute("store", storeService.findOne(id));
         model.addAttribute("header", "Agreements-add new");
         return "stores/edit";

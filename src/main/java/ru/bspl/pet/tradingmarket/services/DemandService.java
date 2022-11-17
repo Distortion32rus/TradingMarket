@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.Demand;
 import ru.bspl.pet.tradingmarket.models.DemandId;
+import ru.bspl.pet.tradingmarket.models.Store;
 import ru.bspl.pet.tradingmarket.repos.DemandRepo;
 
 import java.util.List;
@@ -29,9 +30,19 @@ public class DemandService {
         return demand.orElse(null);
     }
 
+    public List<Demand> findByStore(Store store){
+        Optional<List<Demand>> demands = Optional.ofNullable(demandRepo.findByStore(store));
+        return demands.orElse(null);
+    }
+
     @Transactional
     public void save(Demand demand){
         demandRepo.save(demand);
+    }
+
+    @Transactional
+    public void saveAll(List<Demand> demands){
+        demandRepo.saveAll(demands);
     }
 
     @Transactional
@@ -40,8 +51,8 @@ public class DemandService {
         demandRepo.save(demand);
     }
 
-   /* @Transactional
-    public void delete(Long id){
-        demandRepo.deleteById(id);
-    }*/
+    @Transactional
+    public void deleteAll(List<Demand> demands){
+        demandRepo.deleteAll(demands);
+    }
 }

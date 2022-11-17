@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <th:block th:insert="common.html :: header"></th:block>
 </head>
-<body class="p-3 mb-2 bg-dark text-white">
+<body class="text-bg-dark p-3">
 <a href="stores/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
 <table class="table table-dark table-hover">
     <thead>
@@ -16,10 +16,11 @@
         <th scope="col">price zone</th>
         <th scope="col">business unit</th>
         <th scope="col">organization</th>
-        <th scope="col">Edit</th>
+        <th scope="col">Threshold val</th>
+        <th scope="col"></th>
     </tr>
     </thead>
-    <tbody >
+    <tbody>
     <tr th:each="store : ${stores}">
         <th scope="row" th:text="${store.getId()}">Store id</th>
         <td th:text="${store.getName()}">Store name</td>
@@ -28,11 +29,10 @@
         <td th:text="${store.getPriceZone().getName()}">Store price zone</td>
         <td th:text="${store.getBusinessUnit().getName()}">Store business unit</td>
         <td th:text="${store.getOrganization().getName()}">Store organization</td>
+        <td th:text="${store.getThresholdValues().getName()}">Store threshold values</td>
         <td><a th:href="@{/stores/{id}/edit(id=${store.getId()})}">Edit</a></td>
     </tr>
     </tbody>
 </table>
 </body>
-
-
 </html>

@@ -5,7 +5,7 @@
 
     <th:block th:insert="common.html :: header"></th:block>
 </head>
-<body>
+<body class="text-bg-dark p-3">
 <div>
     <form th:method="POST" th:action="@{/stores}" th:object="${store}">
         <label for="name">Enter name</label>
@@ -17,6 +17,10 @@
         <label for="priceZone">Select price zone</label>
         <select th:field="*{priceZone}" id="priceZone">
             <option th:each="priceZone : ${priseZones}" th:value="${priceZone.getId()}" th:name="priceZone" th:text="${priceZone.getName()}"></option>
+        </select>
+        <label for="thresholdValues">Select threshold values</label>
+        <select th:field="*{thresholdValues}" id="thresholdValues">
+            <option th:each="thresholdValue : ${thresholdValues}" th:value="${thresholdValue.getId()}" th:name="thresholdValues" th:text="${thresholdValue.getName()}"></option>
         </select>
         <label for="businessUnit">Select business unit</label>
         <select th:field="*{businessUnit}" id="businessUnit">
