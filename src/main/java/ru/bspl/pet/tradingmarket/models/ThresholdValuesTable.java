@@ -18,6 +18,11 @@ public class ThresholdValuesTable {
 
     private int maxPrice, minPrice, deviation;
 
+
+    public ThresholdValuesTable(ThresholdValues thresholdValues) {
+        this.thresholdValues = thresholdValues;
+    }
+
     public ThresholdValuesTable(ThresholdValues thresholdValues, ThresholdCategories thresholdCategory, int maxPrice, int minPrice, int deviation) {
         this.thresholdValues = thresholdValues;
         this.thresholdCategory = thresholdCategory;

@@ -5,7 +5,7 @@
 
     <th:block th:insert="common.html :: header"></th:block>
 </head>
-<body>
+<body class="text-bg-dark p-3">
 <div>
     <form th:method="POST" th:action="@{/pricelists}" th:object="${pricelist}">
         <label for="priceZone">Select price zone</label>

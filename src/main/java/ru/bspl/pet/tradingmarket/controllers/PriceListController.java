@@ -8,8 +8,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ru.bspl.pet.tradingmarket.dto.PriceListDTO;
+import ru.bspl.pet.tradingmarket.dto.PricePositionDTO;
+import ru.bspl.pet.tradingmarket.models.Counterparty;
 import ru.bspl.pet.tradingmarket.models.PriceList;
 import ru.bspl.pet.tradingmarket.models.PriceListId;
+import ru.bspl.pet.tradingmarket.models.PriceZone;
 import ru.bspl.pet.tradingmarket.services.CounterpartsNomenclatureService;
 import ru.bspl.pet.tradingmarket.services.CounterpartyService;
 import ru.bspl.pet.tradingmarket.services.PriceListService;
@@ -39,68 +42,38 @@ public class PriceListController {
     }
 
     @PostMapping("/api")
-    public ResponseEntity<HttpStatus> create(@RequestBody @Valid ArrayList<PriceListDTO> priceListDTO , BindingResult bindingResult){
+    public ResponseEntity<HttpStatus> create(@RequestBody @Valid PriceListDTO priceListDTO , BindingResult bindingResult){
 
-        /*if(bindingResult.hasErrors()){
-            StringBuilder errorMessage = new StringBuilder();
+        List<PriceList> priceLists = priceListService.findByCounterpartyAndPriceZone(counterpartyService.findOne(priceListDTO.getCounterpartyId()), priceZoneService.findOne(priceListDTO.getPriceZoneId()));
 
-            List<FieldError> errorList = bindingResult.getFieldErrors();
+        if(!priceLists.isEmpty())
+            priceListService.deleteAll(priceLists);
 
-            for(FieldError error : errorList){
-                errorMessage.append(error.getField()).append("-").append(error.getDefaultMessage()).append("; ");
-            }
-
-            throw new PriseListNotCreatedException(errorMessage.toString());
-        }*/
-
-        for (PriceListDTO lpDTO: priceListDTO ) {
-            PriceList pl = convertToPriceList(lpDTO);
-            priceListService.save(pl);
-        }
+        priceListService.saveAll(convertToPriceList(priceListDTO));
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    private PriceList convertToPriceList(PriceListDTO priceListDTO) {
-        PriceList priceList = new PriceList();
+    private List<PriceList> convertToPriceList(PriceListDTO priceListDTO) {
 
-        priceList.setCounterpartysPrice(priceListDTO.getCounterpartysPrice());
-        priceList.setMultiplicityOf(priceListDTO.getMultiplicityOf());
-        priceList.setShelfLife(priceListDTO.getShelfLife());
-        priceList.setCounterpartysStock(priceListDTO.getCounterpartysStock());
-        priceList.setId(new PriceListId(priceZoneService.findOne(priceListDTO.getPriceZoneId()),
-                counterpartyService.findOne(priceListDTO.getCounterpartyId()),
-                counterpartsNomenclatureService.findOne(priceListDTO.getCounterpartsNomenclatureId())));
+        PriceZone priceZone = priceZoneService.findOne(priceListDTO.getPriceZoneId());
+        Counterparty counterparty = counterpartyService.findOne(priceListDTO.getCounterpartyId());
 
-        return priceList;
-    }
-    private PriceListDTO convertToPriceListDTO(PriceList priceList) {
-        PriceListDTO priceListDTO = new PriceListDTO();
+        List<PriceList> priceLists = new ArrayList<>();
 
-        priceListDTO.setPriceZoneId(priceList.getId().getPriceZone().getId());
-        priceListDTO.setCounterpartsNomenclatureId(priceList.getId().getCounterpartsNomenclature().getId());
-        priceListDTO.setCounterpartyId(priceList.getId().getCounterparty().getId());
-        priceListDTO.setCounterpartysPrice(priceList.getCounterpartysPrice());
-        priceListDTO.setCounterpartysStock(priceList.getCounterpartysStock());
-        priceListDTO.setShelfLife(priceList.getShelfLife());
-        priceListDTO.setMultiplicityOf(priceList.getMultiplicityOf());
+        for (PricePositionDTO pricePosition: priceListDTO.getPricePositions()) {
+            PriceList priceList = new PriceList();
+            priceList.setCounterpartysPrice(pricePosition.getCounterpartysPrice());
+            priceList.setMultiplicityOf(pricePosition.getMultiplicityOf());
+            priceList.setShelfLife(pricePosition.getShelfLife());
+            priceList.setCounterpartysStock(pricePosition.getCounterpartysStock());
+            priceList.setId(new PriceListId(priceZone, counterparty,
+                    counterpartsNomenclatureService.findOne(pricePosition.getCounterpartsNomenclatureId())));
 
-        return priceListDTO;
-    }
-
-
-
-    @GetMapping()
-    public List<PriceListDTO> getPrices(){
-        List<PriceListDTO> priceListDTO = new ArrayList<>();
-
-        for(PriceList pl: priceListService.findAll()) {
-            priceListDTO.add(convertToPriceListDTO(pl));
+            priceLists.add(priceList);
         }
 
-        return priceListDTO;
+        return priceLists;
     }
-
-
 
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body class="text-bg-dark p-3">
+<div>
+  <form th:method="POST" th:action="@{/thresholdvalues/{id}/newrow(id=${thresholdValuesTable.getThresholdValues().getId()})}" th:object="${thresholdValuesTable}">
+    <label for="thresholdCategory">Select category</label>
+    <select th:field="*{thresholdCategory}" id="thresholdCategory">
+      <option th:each="thresholdCategory : ${thresholdCategories}" th:value="${thresholdCategory}" th:name="thresholdCategory" th:text="${thresholdCategory.getName()}"></option>
+    </select>
+    <label for="minPrice">Enter minPrice</label>
+    <input type="text" th:field="*{minPrice}" id="minPrice"/>
+    <label for="maxPrice">Enter maxPrice</label>
+    <input type="text" th:field="*{maxPrice}" id="maxPrice"/>
+    <label for="deviation">Enter deviation</label>
+    <input type="text" th:field="*{deviation}" id="deviation"/>
+    <input type="submit" value="Create!"/>
+  </form>
+</div>
+</body>
+</html>

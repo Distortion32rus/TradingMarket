@@ -1,14 +1,25 @@
 package ru.bspl.pet.tradingmarket.models;
 
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class DemandId implements Serializable {
 
+    @ManyToOne( fetch = FetchType.LAZY)
     private Store store;
+    @ManyToOne( fetch = FetchType.LAZY)
     private AssortmentPlan assortmentPlan;
 
     public DemandId() {
+    }
+
+    public DemandId(Store store, AssortmentPlan assortmentPlan) {
+        this.store = store;
+        this.assortmentPlan = assortmentPlan;
     }
 
     public Store getStore() {

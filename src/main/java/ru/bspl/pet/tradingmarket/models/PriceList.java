@@ -10,23 +10,19 @@ import java.util.Locale;
 
 @Entity
 public class PriceList {
-
-
     @EmbeddedId
     private PriceListId id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("price_zone_id")
-    //@JoinColumn(name="price_zone_id")
     private PriceZone priceZone;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("counterparty_id")
-    //@JoinColumn(name="counterparty_id")
     private Counterparty counterparty;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("counterparts_nomenclature_id")
-    //@JoinColumn(name="counterparts_nomenclature_id")
     private CounterpartsNomenclature counterpartsNomenclature;
     private double counterpartysPrice;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

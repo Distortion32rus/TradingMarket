@@ -3,24 +3,26 @@ package ru.bspl.pet.tradingmarket.models;
 import javax.persistence.*;
 
 @Entity
-@IdClass(DemandId.class)
 public class Demand {
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "store_id")
+
+    @EmbeddedId
+    private DemandId id;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("store_id")
     private Store store;
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "assortment_plan_id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("assortment_plan_id")
     private AssortmentPlan assortmentPlan;
 
     private int demandQNT, stockQNT;
 
     private double salesSpeed;
 
-    public Demand(Store store, AssortmentPlan assortmentPlan, int demandQNT, int stockQNT, double salesSpeed) {
-        this.store = store;
-        this.assortmentPlan = assortmentPlan;
+    public Demand(DemandId id, int demandQNT, int stockQNT, double salesSpeed) {
+        this.id = id;
         this.demandQNT = demandQNT;
         this.stockQNT = stockQNT;
         this.salesSpeed = salesSpeed;
@@ -53,25 +55,11 @@ public class Demand {
         this.salesSpeed = salesSpeed;
     }
 
-    public AssortmentPlan getAssortmentPlan() {
-        return assortmentPlan;
+    public DemandId getId() {
+        return id;
     }
-
-    public void setAssortmentPlan(AssortmentPlan assortmentPlan) {
-        this.assortmentPlan = assortmentPlan;
-    }
-
-    public Store getStore() {
-        return store;
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
-    }
-
 
     public void setId(DemandId demandId) {
-        this.store = demandId.getStore();
-        this.assortmentPlan = demandId.getAssortmentPlan();
+        this.id = demandId;
     }
 }

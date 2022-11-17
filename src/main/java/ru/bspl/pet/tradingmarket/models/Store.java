@@ -22,6 +22,10 @@ public class Store {
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "thresholdValues_id")
+    private ThresholdValues thresholdValues;
+
     public Organization getOrganization() {
         return organization;
     }
@@ -77,13 +81,23 @@ public class Store {
     public void setPriceZone(PriceZone priceZone) {
         this.priceZone = priceZone;
     }
-    public Store(String name, String description, int priority, PriceZone priceZone, BusinessUnit businessUnit, Organization organization) {
+
+    public ThresholdValues getThresholdValues() {
+        return thresholdValues;
+    }
+
+    public void setThresholdValues(ThresholdValues thresholdValues) {
+        this.thresholdValues = thresholdValues;
+    }
+
+    public Store(String name, String description, int priority, PriceZone priceZone, BusinessUnit businessUnit, Organization organization, ThresholdValues thresholdValues) {
         this.name = name;
         this.description = description;
         this.priority = priority;
         this.priceZone = priceZone;
         this.businessUnit = businessUnit;
         this.organization = organization;
+        this.thresholdValues = thresholdValues;
     }
 
     public Store() {
