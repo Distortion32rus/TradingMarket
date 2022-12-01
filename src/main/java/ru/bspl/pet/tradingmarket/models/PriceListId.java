@@ -7,11 +7,11 @@ import java.util.Objects;
 @Embeddable
 public class PriceListId implements Serializable {
 
-    @ManyToOne( fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private PriceZone priceZone;
-    @ManyToOne( fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Counterparty counterparty;
-    @ManyToOne( fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private CounterpartsNomenclature counterpartsNomenclature;
 
 

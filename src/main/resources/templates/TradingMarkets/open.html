@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body class="text-bg-dark p-3">
+<div >
+    <form th:method="POST" th:action="@{/tradingmarkets/{id}(id=${tradingMarket.getId()})}" th:object="${tradingMarket}">
+        <label for="name">Enter name</label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <input type="submit" value="Save!"/>
+    </form>
+
+    <a th:href="@{/tradingmarkets/{id}/newstore(id=${tradingMarket.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="store : ${tradingMarketStores}">
+            <th scope="row" th:text="${store.getStore().getName()}">Name</th>
+            <td><a th:href="@{/tradingmarkets/{id}/{storeid}/edit(id=${store.getTradingMarket().getId()},storeid=${store.getStore().getId()})}">Edit</a></td>
+            <td><a th:href="@{/tradingmarkets/{id}/{storeid}/delete(id=${store.getTradingMarket().getId()},storeid=${store.getStore().getId()})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <a th:href="@{/tradingmarkets/{id}/calc(id=${tradingMarket.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Calc</a>
+
+    <!--table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Threshold category</th>
+            <th scope="col">Min price</th>
+            <th scope="col">Max price</th>
+            <th scope="col">Deviation</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="thresholdValueTable : ${thresholdValueTables}">
+            <th scope="row" th:text="${thresholdValueTable.getThresholdCategory()}">Threshold category</th>
+            <th scope="row" th:text="${thresholdValueTable.getMinPrice()}">Min price</th>
+            <th scope="row" th:text="${thresholdValueTable.getMaxPrice()}">Max price</th>
+            <td th:text="${thresholdValueTable.getDeviation()}">Deviation</td>
+            <td><a th:href="@{/thresholdvalues/{id}/{rowid}/edit(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}">Edit</a></td>
+            <td><a th:href="@{/thresholdvalues/{id}/{rowid}/delete(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table-->
+
+    <form th:method="DELETE" th:action="@{/tradingmarkets/{id}/delete(id=${tradingMarket.getId()})}" >
+        <input type="submit" value="Delete"/>
+    </form>
+
+</div>
+</body>
+</html>

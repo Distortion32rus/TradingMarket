@@ -24,6 +24,7 @@ public class ThresholdValuesTableService {
     public List<ThresholdValuesTable> findAll(){
         return thresholdValuesTableRepo.findAll();
     }
+
     public ThresholdValuesTable findOne(Long id){
         Optional<ThresholdValuesTable> thresholdValuesTable = thresholdValuesTableRepo.findById(id);
         return thresholdValuesTable.orElse(null);

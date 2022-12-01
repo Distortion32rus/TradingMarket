@@ -3,7 +3,13 @@ package ru.bspl.pet.tradingmarket.models;
 import javax.persistence.*;
 import java.util.List;
 
+
+
 @Entity
+/*@NamedStoredProcedureQuery(name = "TradingMarket.tradingMarketCalc",
+        procedureName = "trading_market_calc", parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "tmid", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "count_out", type = Integer.class)})*/
 @SequenceGenerator(name="TRADING_MARKET", sequenceName="TRADING_MARKET_GENERATOR")
 public class TradingMarket {
     @Id
@@ -14,18 +20,29 @@ public class TradingMarket {
     private List<TradingMarketDistribution> tradingMarketDistributionList;
 
     private String name;
-    private double demandReplenishmentSumm, preOrderSumm;
+
+    public TradingMarket() {
+    }
+
+    public TradingMarket(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public long getId() {
         return id;
     }
 
-    public TradingMarket(String name) {
-        this.name = name;
-    }
-
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<TradingMarketDistribution> getTradingMarketDistributionList() {
+        return tradingMarketDistributionList;
+    }
+
+    public void setTradingMarketDistributionList(List<TradingMarketDistribution> tradingMarketDistributionList) {
+        this.tradingMarketDistributionList = tradingMarketDistributionList;
     }
 
     public String getName() {
@@ -34,24 +51,5 @@ public class TradingMarket {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getDemandReplenishmentSumm() {
-        return demandReplenishmentSumm;
-    }
-
-    public void setDemandReplenishmentSumm(double demandReplenishmentSumm) {
-        this.demandReplenishmentSumm = demandReplenishmentSumm;
-    }
-
-    public double getPreOrderSumm() {
-        return preOrderSumm;
-    }
-
-    public void setPreOrderSumm(double preOrderSumm) {
-        this.preOrderSumm = preOrderSumm;
-    }
-
-    public TradingMarket() {
     }
 }

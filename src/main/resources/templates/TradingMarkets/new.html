@@ -2,16 +2,13 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-
     <th:block th:insert="common.html :: header"></th:block>
 </head>
 <body class="text-bg-dark p-3">
-<div>
-    <form th:method="POST" th:action="@{/organizations}" th:object="${organization}">
+<div >
+    <form th:method="POST" th:action="@{/tradingmarkets}" th:object="${tradingMarket}">
         <label for="name">Enter name</label>
         <input type="text" th:field="*{name}" id="name"/>
-        <label for="description">Enter description</label>
-        <input type="text" th:field="*{description}" id="description"/>
         <input type="submit" value="Create!"/>
     </form>
 </div>

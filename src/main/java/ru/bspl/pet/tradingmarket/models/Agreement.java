@@ -10,7 +10,7 @@ public class Agreement {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AGREEMENT")
     private Long id;
 
-    private int defermentOfPayment, minFirstOrderAmoung, minSecondaryOrderAmoung;
+    private int defermentOfPayment, minFirstOrderAmoung, minSecondaryOrderAmoung , defermentRate;
 
     @ManyToOne
     @JoinColumn(name = "counterparty_id")
@@ -20,12 +20,13 @@ public class Agreement {
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
-    public Agreement(int defermentOfPayment, int minFirstOrderAmoung, int minSecondaryOrderAmoung, Counterparty counterparty, Organization organization) {
+    public Agreement(int defermentOfPayment, int minFirstOrderAmoung, int minSecondaryOrderAmoung, Counterparty counterparty, Organization organization, int defermentRate) {
         this.defermentOfPayment = defermentOfPayment;
         this.minFirstOrderAmoung = minFirstOrderAmoung;
         this.minSecondaryOrderAmoung = minSecondaryOrderAmoung;
         this.counterparty = counterparty;
         this.organization = organization;
+        this.defermentRate = defermentRate;
     }
     public Agreement() {
     }
@@ -60,6 +61,14 @@ public class Agreement {
 
     public void setMinSecondaryOrderAmoung(int minSecondaryOrderAmoung) {
         this.minSecondaryOrderAmoung = minSecondaryOrderAmoung;
+    }
+
+    public int getDefermentRate() {
+        return defermentRate;
+    }
+
+    public void setDefermentRate(int defermentRate) {
+        this.defermentRate = defermentRate;
     }
 
     public Organization getOrganization() {

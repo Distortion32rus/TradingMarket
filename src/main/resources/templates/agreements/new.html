@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <th:block th:insert="common.html :: header"></th:block>
@@ -17,6 +17,8 @@
         </select>
         <label for="defermentOfPayment">Enter deferment Of Payment</label>
         <input type="text" th:field="*{defermentOfPayment}" id="defermentOfPayment"/>
+        <label for="defermentRate">Enter deferment rate</label>
+        <input type="text" th:field="*{defermentRate}" id="defermentRate"/>
         <label for="minFirstOrderAmoung">Enter minFirstOrderAmoung</label>
         <input type="text" th:field="*{minFirstOrderAmoung}" id="minFirstOrderAmoung"/>
         <label for="minSecondaryOrderAmoung">Enter minSecondaryOrderAmoung</label>
