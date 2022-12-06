@@ -37,26 +37,6 @@ public class TradingMarketDistribution {
     public TradingMarketDistribution() {
     }
 
-    public TradingMarketDistribution(TradingMarketDistributionId id, int demandQNT, int roundDemandQNT, int onStockQNT, int multiplicityOf, int counterpartiesStock, double counterpartiesPrice, double convertedPrice, double bestPrice, double salesSpeed, Date shelfLife, boolean inPriceControl, boolean nomenComparitionControl, boolean shelfLifeControl, boolean multiplicityControl, boolean minSupplBalanceControl, boolean maxStockControl, boolean bestPriceControl) {
-        this.id = id;
-        this.demandQNT = demandQNT;
-        this.roundDemandQNT = roundDemandQNT;
-        this.onStockQNT = onStockQNT;
-        this.multiplicityOf = multiplicityOf;
-        this.counterpartiesStock = counterpartiesStock;
-        this.counterpartiesPrice = counterpartiesPrice;
-        this.convertedPrice = convertedPrice;
-        this.bestPrice = bestPrice;
-        this.salesSpeed = salesSpeed;
-        this.shelfLife = shelfLife;
-        this.inPriceControl = inPriceControl;
-        this.nomenComparitionControl = nomenComparitionControl;
-        this.shelfLifeControl = shelfLifeControl;
-        this.multiplicityControl = multiplicityControl;
-        this.minSupplBalanceControl = minSupplBalanceControl;
-        this.maxStockControl = maxStockControl;
-        this.bestPriceControl = bestPriceControl;
-    }
 
     public TradingMarketDistributionId getId() {
         return id;
