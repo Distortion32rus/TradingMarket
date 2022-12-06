@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests()
                 .antMatchers("/pricelists/api","/demand/api","/auth/login", "/auth/registration").permitAll()
                 .anyRequest().hasAnyRole("ADMIN", "USER")
-                .and().csrf().disable()                                            //todo вернуть CSRF
+                .and()
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
                 .defaultSuccessUrl("/", true)
