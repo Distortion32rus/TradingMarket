@@ -9,6 +9,7 @@ import ru.bspl.pet.tradingmarket.services.StoreService;
 import ru.bspl.pet.tradingmarket.services.TradingMarketDistributionService;
 import ru.bspl.pet.tradingmarket.services.TradingMarketService;
 import ru.bspl.pet.tradingmarket.services.TradingMarketStoresService;
+import ru.bspl.pet.tradingmarket.utils.OrdersIsCreatedException;
 
 @Controller
 @RequestMapping("/tradingmarkets")
@@ -109,9 +110,8 @@ public class TradingMarketController {
 
     @PostMapping("/{id}/{storeid}/edit")
     public String updateRow(@ModelAttribute("store") Store store,
-                            @PathVariable("id") Long id, @PathVariable("storeid") Long storeId){
+                            @PathVariable("id") Long id){
         TradingMarket tm = tradingMarketService.findOne(id);
-        store = storeService.findOne(store.getId());
         TradingMarketStores tradingMarketStores = new TradingMarketStores();
         tradingMarketStores.setId(new TradingMarketStoresId(tm,store));
         tradingMarketStores.setTradingMarket(tm);
@@ -128,7 +128,23 @@ public class TradingMarketController {
 
     @GetMapping("/{id}/calc")
     public String traidingMarketCalc(@PathVariable("id") Long id){
-        tradingMarketService.tradingMarketCalc(id);
+        try {
+            tradingMarketService.tradingMarketCalc(id);
+        } catch (OrdersIsCreatedException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/tradingmarkets/"+id+"/open";
+    }
+
+    @GetMapping("/{id}/createorders")
+    public String createOrders(@PathVariable("id") Long id)  {
+
+        try {
+            tradingMarketService.createOrders(id);
+        } catch (OrdersIsCreatedException e) {
+            e.printStackTrace();
+        }
+
         return "redirect:/tradingmarkets/"+id+"/open";
     }
 

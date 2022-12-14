@@ -1,7 +1,5 @@
 package ru.bspl.pet.tradingmarket.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -67,11 +65,11 @@ public class Counterparty {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Counterparty that = (Counterparty) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(agreements, that.agreements);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, description, agreements);
     }
 }

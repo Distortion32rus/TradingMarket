@@ -1,6 +1,7 @@
 package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Demand {
@@ -61,5 +62,18 @@ public class Demand {
 
     public void setId(DemandId demandId) {
         this.id = demandId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Demand demand = (Demand) o;
+        return demandQNT == demand.demandQNT && stockQNT == demand.stockQNT && Double.compare(demand.salesSpeed, salesSpeed) == 0 && Objects.equals(id, demand.id) && Objects.equals(store, demand.store) && Objects.equals(assortmentPlan, demand.assortmentPlan);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, store, assortmentPlan, demandQNT, stockQNT, salesSpeed);
     }
 }

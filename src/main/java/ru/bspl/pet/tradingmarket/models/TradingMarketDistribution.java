@@ -2,6 +2,7 @@ package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class TradingMarketDistribution {
@@ -32,11 +33,11 @@ public class TradingMarketDistribution {
     private int demandQNT, roundDemandQNT, onStockQNT, multiplicityOf, counterpartiesStock;
     private double counterpartiesPrice, convertedPrice, bestPrice, salesSpeed;
     private Date  shelfLife;
-    private boolean inPriceControl, nomenComparitionControl, shelfLifeControl, multiplicityControl, minSupplBalanceControl, maxStockControl, bestPriceControl;
+    private boolean inPriceControl, nomenComparitionControl, shelfLifeControl,
+            multiplicityControl, minSupplBalanceControl, maxStockControl, bestPriceControl;
 
     public TradingMarketDistribution() {
     }
-
 
     public TradingMarketDistributionId getId() {
         return id;
@@ -220,5 +221,18 @@ public class TradingMarketDistribution {
 
     public void setBestPriceControl(boolean bestPriceControl) {
         this.bestPriceControl = bestPriceControl;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TradingMarketDistribution that = (TradingMarketDistribution) o;
+        return demandQNT == that.demandQNT && roundDemandQNT == that.roundDemandQNT && onStockQNT == that.onStockQNT && multiplicityOf == that.multiplicityOf && counterpartiesStock == that.counterpartiesStock && Double.compare(that.counterpartiesPrice, counterpartiesPrice) == 0 && Double.compare(that.convertedPrice, convertedPrice) == 0 && Double.compare(that.bestPrice, bestPrice) == 0 && Double.compare(that.salesSpeed, salesSpeed) == 0 && inPriceControl == that.inPriceControl && nomenComparitionControl == that.nomenComparitionControl && shelfLifeControl == that.shelfLifeControl && multiplicityControl == that.multiplicityControl && minSupplBalanceControl == that.minSupplBalanceControl && maxStockControl == that.maxStockControl && bestPriceControl == that.bestPriceControl && Objects.equals(id, that.id) && Objects.equals(tradingMarket, that.tradingMarket) && Objects.equals(store, that.store) && Objects.equals(assortmentPlan, that.assortmentPlan) && Objects.equals(counterparty, that.counterparty) && Objects.equals(counterpartsNomenclature, that.counterpartsNomenclature) && Objects.equals(shelfLife, that.shelfLife);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, tradingMarket, store, assortmentPlan, counterparty, counterpartsNomenclature, demandQNT, roundDemandQNT, onStockQNT, multiplicityOf, counterpartiesStock, counterpartiesPrice, convertedPrice, bestPrice, salesSpeed, shelfLife, inPriceControl, nomenComparitionControl, shelfLifeControl, multiplicityControl, minSupplBalanceControl, maxStockControl, bestPriceControl);
     }
 }

@@ -15,24 +15,24 @@
                         <li><a href="/main" class="nav-link px-2 text-secondary">Home</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Company infrastructure
+                                Инфраструктура компании
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="/pricezones">Prise zones</a></li>
-                                <li><a class="dropdown-item" href="/businessunits">Business units</a></li>
-                                <li><a class="dropdown-item" href="/organizations">Organizations</a></li>
-                                <li><a class="dropdown-item" href="/stores">Stores</a></li>
+                                <li><a class="dropdown-item" href="/pricezones">Ценовые зоны</a></li>
+                                <li><a class="dropdown-item" href="/businessunits">Бизнес единицы</a></li>
+                                <li><a class="dropdown-item" href="/organizations">Огранизации</a></li>
+                                <li><a class="dropdown-item" href="/stores">Склады</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Nomenclature & assortment
+                                Номенклатура
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="/typesofassortmentplans">Types of assortment plans</a></li>
-                                <li><a class="dropdown-item" href="/assortmentplans">Assortment plans</a></li>
-                                <li><a class="dropdown-item" href="/nomenclatures">Nomenclatures</a></li>
-                                <li><a class="dropdown-item" href="/counterpartsnomenclatures">Counterparts nomenclatures</a></li>
+                                <li><a class="dropdown-item" href="/typesofassortmentplans">Типы ассортиментных планов</a></li>
+                                <li><a class="dropdown-item" href="/assortmentplans">Ассортиментные планы</a></li>
+                                <li><a class="dropdown-item" href="/nomenclatures">Номенклатуры</a></li>
+                                <li><a class="dropdown-item" href="/counterpartsnomenclatures">Номенклатура поставщиков</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -40,9 +40,9 @@
                                 Counterparties information
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="/counterparties">counterparties</a></li>
-                                <li><a class="dropdown-item" href="/counterpartsnomenclatures">Counterparts nomenclatures</a></li>
-                                <li><a class="dropdown-item" href="/agreements">agreements</a></li>
+                                <li><a class="dropdown-item" href="/counterparties">Поставщики</a></li>
+                                <li><a class="dropdown-item" href="/counterpartsnomenclatures">Номенклатура поставщиков</a></li>
+                                <li><a class="dropdown-item" href="/agreements">Соглашения с поставщиками</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -50,20 +50,12 @@
                                 Trading market
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="/thresholdvalues">thresholdvalues</a></li>
+                                <li><a class="dropdown-item" href="/thresholdvalues">Ограничения для торгов</a></li>
+                                <li><a class="dropdown-item" href="/tradingmarkets">Торговые площадки</a></li>
+                                <li><a class="dropdown-item" href="/orders">Заказы</a></li>
                             </ul>
                         </li>
                     </ul>
-
-                    <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                         <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-                     </form>
-
-                     <div class="text-end">
-                         <button type="button" class="btn btn-outline-light me-2">Login</button>
-                         <button type="button" class="btn btn-warning">Sign-up</button>
-                     </div>
-                     -->
                     <form th:action ="@{/logout}" th:method="POST">
                         <input type="submit" value="Logout" >
                     </form>

@@ -3,6 +3,7 @@ package ru.bspl.pet.tradingmarket.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.bspl.pet.tradingmarket.models.Store;
 import ru.bspl.pet.tradingmarket.models.TradingMarket;
 import ru.bspl.pet.tradingmarket.models.TradingMarketDistribution;
 import ru.bspl.pet.tradingmarket.repos.TradingMarketDistributionRepo;
@@ -26,4 +27,10 @@ public class TradingMarketDistributionService {
     public void deleteAll(List<TradingMarketDistribution> tradingMarketDistributions){
         tradingMarketDistributionRepo.deleteAll(tradingMarketDistributions);
     }
+
+    public List<TradingMarketDistribution> findDistributionsToOrder(TradingMarket tradingMarket, Store store){
+        return tradingMarketDistributionRepo.findByTradingMarketAndStoreAndInPriceControlAndNomenComparitionControlAndShelfLifeControlAndMultiplicityControlAndMinSupplBalanceControlAndMaxStockControlAndBestPriceControl(
+             tradingMarket, store, true, true, true, true, true, true, true);
+    }
+
 }

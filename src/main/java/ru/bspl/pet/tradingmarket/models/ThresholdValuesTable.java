@@ -1,6 +1,7 @@
 package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @SequenceGenerator(name="THRESHOLD_VALUES_TABLE", sequenceName="THRESHOLD_VALUES_TABLE_GENERATOR")
@@ -84,4 +85,16 @@ public class ThresholdValuesTable {
         this.thresholdValues = thresholdValues;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ThresholdValuesTable that = (ThresholdValuesTable) o;
+        return maxPrice == that.maxPrice && minPrice == that.minPrice && deviation == that.deviation && Objects.equals(id, that.id) && Objects.equals(thresholdValues, that.thresholdValues) && thresholdCategory == that.thresholdCategory;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, thresholdValues, thresholdCategory, maxPrice, minPrice, deviation);
+    }
 }

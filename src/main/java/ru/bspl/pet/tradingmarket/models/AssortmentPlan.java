@@ -2,6 +2,7 @@ package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @SequenceGenerator(name="ASSORTMENT_PLAN", sequenceName="ASSORTMENT_PLAN_GENERATOR")
@@ -12,6 +13,10 @@ public class AssortmentPlan {
     private Long id;
 
     private String name;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "type_of_assortment_plans_id")
+    private TypeOfAssortmentPlans typeOfAssortmentPlans;
 
     @OneToMany(mappedBy = "assortmentPlan", cascade = CascadeType.ALL)
     private List<Nomenclature> nomenclatures;
@@ -47,7 +52,16 @@ public class AssortmentPlan {
     public AssortmentPlan() {
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "type_of_assortment_plans_id")
-    private TypeOfAssortmentPlans typeOfAssortmentPlans;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AssortmentPlan that = (AssortmentPlan) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(typeOfAssortmentPlans, that.typeOfAssortmentPlans);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, typeOfAssortmentPlans);
+    }
 }

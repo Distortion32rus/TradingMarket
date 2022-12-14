@@ -3,10 +3,8 @@ package ru.bspl.pet.tradingmarket.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
+import java.util.Objects;
 
 @Entity
 public class PriceList {
@@ -24,6 +22,7 @@ public class PriceList {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("counterparts_nomenclature_id")
     private CounterpartsNomenclature counterpartsNomenclature;
+
     private double counterpartysPrice;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date shelfLife;
@@ -79,5 +78,18 @@ public class PriceList {
 
     public void setCounterpartysStock(int counterpartysStock) {
         this.counterpartysStock = counterpartysStock;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PriceList priceList = (PriceList) o;
+        return Double.compare(priceList.counterpartysPrice, counterpartysPrice) == 0 && multiplicityOf == priceList.multiplicityOf && counterpartysStock == priceList.counterpartysStock && Objects.equals(id, priceList.id) && Objects.equals(priceZone, priceList.priceZone) && Objects.equals(counterparty, priceList.counterparty) && Objects.equals(counterpartsNomenclature, priceList.counterpartsNomenclature) && Objects.equals(shelfLife, priceList.shelfLife);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, priceZone, counterparty, counterpartsNomenclature, counterpartysPrice, shelfLife, multiplicityOf, counterpartysStock);
     }
 }

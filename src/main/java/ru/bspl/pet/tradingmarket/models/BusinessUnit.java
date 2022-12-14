@@ -3,6 +3,7 @@ package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @SequenceGenerator(name="BUSINESS_UNIT", sequenceName="BUSINESS_UNIT_GENERATOR")
@@ -58,5 +59,16 @@ public class BusinessUnit {
     public BusinessUnit() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BusinessUnit that = (BusinessUnit) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description);
+    }
 }
