@@ -1,6 +1,7 @@
 package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class TradingMarketStores {
@@ -51,5 +52,18 @@ public class TradingMarketStores {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TradingMarketStores that = (TradingMarketStores) o;
+        return Objects.equals(id, that.id) && Objects.equals(tradingMarket, that.tradingMarket) && Objects.equals(store, that.store);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, tradingMarket, store);
     }
 }

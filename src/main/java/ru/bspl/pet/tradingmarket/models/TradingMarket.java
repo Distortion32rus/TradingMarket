@@ -2,7 +2,7 @@ package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
 import java.util.List;
-
+import java.util.Objects;
 
 
 @Entity
@@ -51,5 +51,18 @@ public class TradingMarket {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TradingMarket that = (TradingMarket) o;
+        return id == that.id && Objects.equals(tradingMarketDistributionList, that.tradingMarketDistributionList) && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, tradingMarketDistributionList, name);
     }
 }

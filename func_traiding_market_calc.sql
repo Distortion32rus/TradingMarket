@@ -3,7 +3,7 @@
 -- DROP FUNCTION IF EXISTS tm.func_trading_market_calc(bigint);
 
 CREATE OR REPLACE FUNCTION tm.func_trading_market_calc(
-    tm_id bigint)
+    tmid bigint)
     RETURNS integer
     LANGUAGE 'plpgsql'
     COST 100
@@ -18,7 +18,7 @@ BEGIN
     SELECT  trading_market_stores.store_id, trading_market_stores.trading_market_id
     FROM
         tm.trading_market_stores
-    WHERE trading_market_stores.trading_market_id = tm_id;
+    WHERE trading_market_stores.trading_market_id = tmId;
 
     CREATE TEMP TABLE IF NOT EXISTS dm_store_nomen ON COMMIT DROP AS
     SELECT
@@ -186,7 +186,7 @@ BEGIN
                   ,trading_market_id
     FROM tp;
 
-    SELECT COUNT(*) into row_counter FROM  tm.trading_market_distribution where trading_market_id = tm_id;
+    SELECT COUNT(*) into row_counter FROM  tm.trading_market_distribution where trading_market_id = tmid;
     RETURN row_counter;
 
 END

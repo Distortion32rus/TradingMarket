@@ -13,4 +13,7 @@ public interface TradingMarketRepo extends JpaRepository<TradingMarket, Long> {
 
     @Query(value = "SELECT func_trading_market_calc(:tmid);", nativeQuery = true)
     Integer tradingMarketCalc(@Param("tmid") Long tmid);
+
+    @Query(value = "SELECT func_create_order(:tmid, :storeid);", nativeQuery = true)
+    Integer createOrders(@Param("tmid") Long tmid, @Param("storeid") Long storeid);
 }

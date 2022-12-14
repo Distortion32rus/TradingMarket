@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @SequenceGenerator(name="PERSON", sequenceName="PERSON_GENERATOR")
@@ -72,5 +73,18 @@ public class Person {
 
     public void seteMail(String eMail) {
         this.eMail = eMail;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(id, person.id) && Objects.equals(username, person.username) && Objects.equals(role, person.role) && Objects.equals(password, person.password) && Objects.equals(eMail, person.eMail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, role, password, eMail);
     }
 }

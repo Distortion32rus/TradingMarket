@@ -2,6 +2,7 @@ package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class TypeOfAssortmentPlans {
@@ -37,5 +38,18 @@ public class TypeOfAssortmentPlans {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TypeOfAssortmentPlans that = (TypeOfAssortmentPlans) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

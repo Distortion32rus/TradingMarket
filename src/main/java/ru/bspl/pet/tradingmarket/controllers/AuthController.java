@@ -19,14 +19,12 @@ import javax.validation.Valid;
 public class AuthController {
 
     private final PersonValidator personValidator;
-    private final PersonService personService;
     private final RegistrationService registrationService;
 
 
     @Autowired
-    public AuthController(PersonValidator personValidator, PersonService personService, RegistrationService registrationService) {
+    public AuthController(PersonValidator personValidator, RegistrationService registrationService) {
         this.personValidator = personValidator;
-        this.personService = personService;
         this.registrationService = registrationService;
     }
 

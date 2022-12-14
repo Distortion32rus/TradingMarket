@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <th:block th:insert="common.html :: header"></th:block>
+</head>
+<body class="text-bg-dark p-3">
+<div >
+
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Ассортиментный план</th>
+            <th scope="col">Номенклатура поставщика</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Срок годности</th>
+            <th scope="col">Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderPosition : ${orderPositions}">
+            <th scope="row" th:text="${orderPosition.getAssortmentPlan().getName()}">assortmentPlan</th>
+            <th scope="row" th:text="${orderPosition.getCounterpartsNomenclature().getName()}">counterpartsNomenclature</th>
+            <th scope="row" th:text="${orderPosition.getQuantity()}">quantity</th>
+            <th scope="row" th:text="${orderPosition.getShelfLife()}">shelfLife</th>
+            <th scope="row" th:text="${orderPosition.getCounterpartiesPrice()}">counterpartiesPrice</th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

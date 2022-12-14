@@ -77,11 +77,11 @@ public class CounterpartsNomenclature {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CounterpartsNomenclature that = (CounterpartsNomenclature) o;
-        return Objects.equals(id, that.id);
+        return multiplicityOf == that.multiplicityOf && Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(nomenclature, that.nomenclature) && Objects.equals(counterparty, that.counterparty);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, multiplicityOf, nomenclature, counterparty);
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.Person;
 import ru.bspl.pet.tradingmarket.repos.PersonRepo;
-import ru.bspl.pet.tradingmarket.security.PersonDetails;
+import ru.bspl.pet.tradingmarket.utils.security.PersonDetails;
 
 import java.util.Optional;
 

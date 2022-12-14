@@ -1,6 +1,7 @@
 package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @SequenceGenerator(name="AGREEMENT", sequenceName="AGREEMENT_GENERATOR")
@@ -87,6 +88,16 @@ public class Agreement {
         this.counterparty = counterparty;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Agreement agreement = (Agreement) o;
+        return defermentOfPayment == agreement.defermentOfPayment && minFirstOrderAmoung == agreement.minFirstOrderAmoung && minSecondaryOrderAmoung == agreement.minSecondaryOrderAmoung && defermentRate == agreement.defermentRate && Objects.equals(id, agreement.id) && Objects.equals(counterparty, agreement.counterparty) && Objects.equals(organization, agreement.organization);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, defermentOfPayment, minFirstOrderAmoung, minSecondaryOrderAmoung, defermentRate, counterparty, organization);
+    }
 }

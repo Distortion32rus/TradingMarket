@@ -1,6 +1,8 @@
 package ru.bspl.pet.tradingmarket.models;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -9,8 +11,10 @@ public class PriceListId implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private PriceZone priceZone;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Counterparty counterparty;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private CounterpartsNomenclature counterpartsNomenclature;
 

@@ -1,6 +1,7 @@
 package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @SequenceGenerator(name="STORE", sequenceName="STORE_GENERATOR")
@@ -9,15 +10,19 @@ public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="STORE")
     private Long id;
+
     private String name;
     private String description;
     private int priority;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "price_zone_id")
     private PriceZone priceZone;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "business_unit_id")
     private BusinessUnit businessUnit;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "organization_id")
     private Organization organization;
@@ -103,4 +108,16 @@ public class Store {
     public Store() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Store store = (Store) o;
+        return priority == store.priority && Objects.equals(id, store.id) && Objects.equals(name, store.name) && Objects.equals(description, store.description) && Objects.equals(priceZone, store.priceZone) && Objects.equals(businessUnit, store.businessUnit) && Objects.equals(organization, store.organization) && Objects.equals(thresholdValues, store.thresholdValues);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, priority, priceZone, businessUnit, organization, thresholdValues);
+    }
 }

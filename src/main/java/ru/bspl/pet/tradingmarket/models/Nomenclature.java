@@ -2,6 +2,7 @@ package ru.bspl.pet.tradingmarket.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @SequenceGenerator(name="NOMENCLATURE", sequenceName="NOMENCLATURE_GENERATOR")
@@ -52,6 +53,16 @@ public class Nomenclature {
         this.assortmentPlan = assortmentPlan;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Nomenclature that = (Nomenclature) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(assortmentPlan, that.assortmentPlan) && Objects.equals(counterpartsNomenclatures, that.counterpartsNomenclatures);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, assortmentPlan, counterpartsNomenclatures);
+    }
 }
