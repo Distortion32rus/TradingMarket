@@ -1,6 +1,7 @@
 package ru.bspl.pet.tradingmarket.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,8 @@ import ru.bspl.pet.tradingmarket.models.Agreement;
 import ru.bspl.pet.tradingmarket.services.AgreementService;
 import ru.bspl.pet.tradingmarket.services.CounterpartyService;
 import ru.bspl.pet.tradingmarket.services.OrganizationService;
+
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/agreements")
@@ -24,10 +27,20 @@ public class AgreementController {
         this.counterpartyService = counterpartyService;
     }
 
-    @GetMapping()
+    /*@GetMapping()
     public String show(Model model) {
         model.addAttribute("agreements", agreementService.findAll());
-        model.addAttribute("header", "Agreements list");
+        model.addAttribute("header", "Список соглашений");
+        return "agreements/index";
+    }*/
+
+    @GetMapping()
+    public String show(Model model,
+                       @RequestParam(name = "page", required = false, defaultValue = "0") Integer page) {
+        Page<Agreement> agreementPage = agreementService.findAll(page, 15);
+        model.addAttribute("agreementPage", agreementPage);
+        model.addAttribute("numbers", IntStream.range(0, agreementPage.getTotalPages()).toArray());
+        model.addAttribute("header", "Список соглашений");
         return "agreements/index";
     }
 
@@ -36,7 +49,7 @@ public class AgreementController {
         model.addAttribute("organizations", organizationService.findAll());
         model.addAttribute("counterparties", counterpartyService.findAll());
         model.addAttribute("agreement", new Agreement());
-        model.addAttribute("header", "Agreements-add new");
+        model.addAttribute("header", "Добавление соглашение");
         return "agreements/new";
     }
 
@@ -51,7 +64,7 @@ public class AgreementController {
         model.addAttribute("organizations", organizationService.findAll());
         model.addAttribute("counterparties", counterpartyService.findAll());
         model.addAttribute("agreement", agreementService.findOne(id));
-        model.addAttribute("header", "Agreements-add new");
+        model.addAttribute("header", "Изменение соглашение");
         return "agreements/edit";
     }
 

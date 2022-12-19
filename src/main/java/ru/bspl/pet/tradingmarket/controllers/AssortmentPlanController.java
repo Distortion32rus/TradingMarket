@@ -1,6 +1,7 @@
 package ru.bspl.pet.tradingmarket.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,8 @@ import ru.bspl.pet.tradingmarket.models.Agreement;
 import ru.bspl.pet.tradingmarket.models.AssortmentPlan;
 import ru.bspl.pet.tradingmarket.services.AssortmentPlanService;
 import ru.bspl.pet.tradingmarket.services.TypeOfAssortmentPlansService;
+
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/assortmentplans")
@@ -23,10 +26,21 @@ public class AssortmentPlanController {
         this.typeOfAssortmentPlansService = typeOfAssortmentPlansService;
     }
 
-    @GetMapping()
+    /*@GetMapping()
     public String show(Model model){
         model.addAttribute("assortmentPlans", assortmentPlanService.findAll());
-        model.addAttribute("header", "assortment plans list");
+        model.addAttribute("header", "Список ассортиментных планов");
+        return "assortmentplans/index";
+    }*/
+
+    @GetMapping()
+    public String show(Model model,
+                       @RequestParam(name="page", required = false, defaultValue = "0") Integer page){
+        Page<AssortmentPlan> assortmentPlanPage = assortmentPlanService.findAll(page, 15);
+
+        model.addAttribute("assortmentPlanPage", assortmentPlanPage);
+        model.addAttribute("numbers", IntStream.range(0, assortmentPlanPage.getTotalPages()).toArray());
+        model.addAttribute("header", "Список ассортиментных планов");
         return "assortmentplans/index";
     }
 
@@ -34,7 +48,7 @@ public class AssortmentPlanController {
     public String addForm(Model model){
         model.addAttribute("assortmentPlan", new AssortmentPlan());
         model.addAttribute("typesOfAssortmentPlans", typeOfAssortmentPlansService.findAll());
-        model.addAttribute("header", "assortment plans-add new");
+        model.addAttribute("header", "Добавление ассортиментного плана");
         return "assortmentplans/new";
     }
 
@@ -47,7 +61,7 @@ public class AssortmentPlanController {
     public String edit(Model model, @PathVariable("id") Long id){
         model.addAttribute("assortmentPlan", assortmentPlanService.findOne(id));
         model.addAttribute("typesOfAssortmentPlans", typeOfAssortmentPlansService.findAll());
-        model.addAttribute("header", "Agreements - edit");  //TODO Испраовить хэдэры
+        model.addAttribute("header", "Изменение ассортиментного плана");
         return "assortmentplans/edit";
     }
     @PostMapping("/{id}")

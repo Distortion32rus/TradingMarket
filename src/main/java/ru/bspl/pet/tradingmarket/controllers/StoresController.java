@@ -1,11 +1,14 @@
 package ru.bspl.pet.tradingmarket.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.bspl.pet.tradingmarket.models.Store;
 import ru.bspl.pet.tradingmarket.services.*;
+
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/stores")
@@ -30,10 +33,21 @@ public class StoresController {
         this.thresholdValuesService = thresholdValuesService;
     }
 
-    @GetMapping()
+    /*@GetMapping()
     public String show(Model model){
         model.addAttribute("stores", storeService.findAll());
-        model.addAttribute("header", "stores  list");
+        model.addAttribute("header", "Список складов");
+        return "stores/index";
+    }*/
+
+    @GetMapping()
+    public String show(Model model,
+                       @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
+        Page<Store> storePage = storeService.findAll(page, 15);
+
+        model.addAttribute("storePage", storePage);
+        model.addAttribute("numbers", IntStream.range(0, storePage.getTotalPages()).toArray());
+        model.addAttribute("header", "Список складов");
         return "stores/index";
     }
 
@@ -44,7 +58,7 @@ public class StoresController {
         model.addAttribute("businessUnits", businessUnitService.findAll());
         model.addAttribute("organizations", organizationService.findAll());
         model.addAttribute("thresholdValues", thresholdValuesService.findAll());
-        model.addAttribute("header", "stores  add new");
+        model.addAttribute("header", "Добавление склада");
         return "stores/new";
     }
 
@@ -61,7 +75,7 @@ public class StoresController {
         model.addAttribute("organizations", organizationService.findAll());
         model.addAttribute("thresholdValues", thresholdValuesService.findAll());
         model.addAttribute("store", storeService.findOne(id));
-        model.addAttribute("header", "Agreements-add new");
+        model.addAttribute("header", "Изменение склада");
         return "stores/edit";
     }
     @PostMapping("/{id}")

@@ -1,6 +1,8 @@
 package ru.bspl.pet.tradingmarket.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.BusinessUnit;
@@ -22,6 +24,10 @@ public class BusinessUnitService {
 
     public List<BusinessUnit> findAll(){
         return businessUnitRepo.findAll();
+    }
+
+    public Page<BusinessUnit> findAll(int page, int size){
+        return businessUnitRepo.findAll(PageRequest.of(page, size));
     }
 
     public BusinessUnit findOne(Long id){

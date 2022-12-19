@@ -1,5 +1,7 @@
 package ru.bspl.pet.tradingmarket.repos;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -14,4 +16,5 @@ import java.util.List;
 public interface ThresholdValuesTableRepo extends JpaRepository<ThresholdValuesTable, Long> {
 
     List<ThresholdValuesTable> findByThresholdValues(ThresholdValues thresholdValues);
+    Page<ThresholdValuesTable> findByThresholdValues(ThresholdValues thresholdValues, Pageable pageable);
 }

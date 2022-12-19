@@ -1,12 +1,15 @@
 package ru.bspl.pet.tradingmarket.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.bspl.pet.tradingmarket.models.AssortmentPlan;
 import ru.bspl.pet.tradingmarket.models.Organization;
 import ru.bspl.pet.tradingmarket.services.OrganizationService;
+
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/organizations")
@@ -18,16 +21,29 @@ public class OrganizationController {
     public OrganizationController(OrganizationService organizationService) {
         this.organizationService = organizationService;
     }
-    @GetMapping()
+
+    /*@GetMapping()
     public String show(Model model){
         model.addAttribute("organizations", organizationService.findAll());
-        model.addAttribute("header", "organizations  list");
+        model.addAttribute("header", "Список организаций");
+        return "organizations/index";
+    }*/
+
+    @GetMapping()
+    public String show(Model model,
+                       @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
+        Page<Organization> organizationPage = organizationService.findAll(page, 15);
+
+        model.addAttribute("organizationPage", organizationPage);
+        model.addAttribute("numbers", IntStream.range(0, organizationPage.getTotalPages()).toArray());
+        model.addAttribute("header", "Список организаций");
         return "organizations/index";
     }
+
     @GetMapping("/new")
     public String addForm(Model model){
         model.addAttribute("organization", new Organization());
-        model.addAttribute("header", "organizations  add new");
+        model.addAttribute("header", "Добавление организации");
         return "organizations/new";
     }
     @PostMapping()
@@ -38,7 +54,7 @@ public class OrganizationController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id){
         model.addAttribute("organization", organizationService.findOne(id));
-        model.addAttribute("header", "Agreements - edit");  //TODO Испраовить хэдэры
+        model.addAttribute("header", "Изменение организации");
         return "organizations/edit";
     }
     @PostMapping("/{id}")

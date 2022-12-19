@@ -1,6 +1,10 @@
 package ru.bspl.pet.tradingmarket.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.*;
@@ -19,8 +23,12 @@ public class OrderPositionService {
         this.orderPositionRepo = orderPositionRepo;
     }
 
-    public List<OrderPosition> findByOrder(Order order){
+    /*public List<OrderPosition> findByOrder(Order order){
         return orderPositionRepo.findByOrder(order);
+    }*/
+
+    public Page<OrderPosition> findByOrder(Order order, int page, int size){
+        return orderPositionRepo.findByOrder(order, PageRequest.of(page, size, Sort.by("assortmentPlan").ascending()));
     }
 
    /* public List<OrderPosition> findByOrderAndStore(Order order, Store store){

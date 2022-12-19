@@ -5,25 +5,30 @@
     <th:block th:insert="common.html :: header"></th:block>
 </head>
 <body class="text-bg-dark p-3">
-<a href="organizations/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
-<table class="table table-dark table-hover">
-    <thead>
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-        <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody >
-    <tr th:each="organization : ${organizations}">
-        <th scope="row" th:text="${organization.getId()}">Price zone id</th>
-        <td th:text="${organization.getName()}">Price zone name</td>
-        <td th:text="${organization.getDescription()}">Price zone description</td>
-        <td><a th:href="@{/organizations/{id}/edit(id=${organization.getId()})}">Edit</a></td>
-    </tr>
-    </tbody>
-</table>
+    <a href="organizations/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr th:each="organization : ${organizationPage.content}">
+                <th scope="row" th:text="${organization.getId()}">Price zone id</th>
+                <td th:text="${organization.getName()}">Price zone name</td>
+                <td th:text="${organization.getDescription()}">Price zone description</td>
+                <td><a th:href="@{/organizations/{id}/edit(id=${organization.getId()})}">Edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <ul class="pagination pagination-sm" th:if="${organizationPage.totalPages > 0}">
+        <li class = "page-item active" th:each = "pageNumber : ${numbers}" th:class = "${pageNumber == organizationPage.number} ? 'page-item active' : 'page-item'" aria-current="page">
+            <a class="page-link" th:href="@{'/organizations?page=' + ${pageNumber}}" th:text="${pageNumber + 1} ">1</a>
+        </li>
+    </ul>
 </body>
 
 </html>

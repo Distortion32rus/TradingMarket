@@ -1,6 +1,8 @@
 package ru.bspl.pet.tradingmarket.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.Order;
@@ -21,6 +23,10 @@ public class OrderService {
 
     public List<Order> findAll(){
         return orderRepo.findAll();
+    }
+
+    public Page<Order> findAll(int page, int size){
+        return orderRepo.findAll(PageRequest.of(page, size));
     }
 
     public List<Order> getByTradingMarket(TradingMarket tradingMarket){
