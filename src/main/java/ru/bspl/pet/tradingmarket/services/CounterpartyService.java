@@ -2,6 +2,8 @@ package ru.bspl.pet.tradingmarket.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.Counterparty;
@@ -23,6 +25,10 @@ public class CounterpartyService {
 
     public List<Counterparty> findAll(){
         return counterpartyRepo.findAll();
+    }
+
+    public Page<Counterparty> findAll(int page, int size){
+        return counterpartyRepo.findAll(PageRequest.of(page, size));
     }
 
     public Counterparty findOne(Long id){

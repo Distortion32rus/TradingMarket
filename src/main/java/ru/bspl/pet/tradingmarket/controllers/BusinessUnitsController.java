@@ -1,5 +1,6 @@
 package ru.bspl.pet.tradingmarket.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,10 +8,11 @@ import ru.bspl.pet.tradingmarket.models.AssortmentPlan;
 import ru.bspl.pet.tradingmarket.models.BusinessUnit;
 import ru.bspl.pet.tradingmarket.services.BusinessUnitService;
 
+import java.util.stream.IntStream;
+
 @Controller
 @RequestMapping("/businessunits")
 public class BusinessUnitsController {
-
 
     private final BusinessUnitService businessUnitService;
 
@@ -19,18 +21,30 @@ public class BusinessUnitsController {
         this.businessUnitService = businessUnitService;
     }
 
-    @GetMapping
+    /*@GetMapping
     public String show(Model model){
         Iterable<BusinessUnit> businessUnits = businessUnitService.findAll();
         model.addAttribute("businessUnits", businessUnits);
-        model.addAttribute("header", "businessUnits list");
+        model.addAttribute("header", "Список бизнес единиц");
+        return "businessunits/index";
+    }*/
+
+    @GetMapping
+    public String show(Model model,
+                       @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
+
+        Page<BusinessUnit> businessUnitPage = businessUnitService.findAll(page, 15);
+
+        model.addAttribute("businessUnitPage", businessUnitPage);
+        model.addAttribute("numbers", IntStream.range(0, businessUnitPage.getTotalPages()).toArray());
+        model.addAttribute("header", "Список бизнес единиц");
         return "businessunits/index";
     }
 
     @GetMapping("/new")
     public String addForm(Model model){
         model.addAttribute(new BusinessUnit());
-        model.addAttribute("header", "businessUnits add new");
+        model.addAttribute("header", "Добавление бизнес единицы");
         return "businessunits/new";
     }
 
@@ -43,9 +57,10 @@ public class BusinessUnitsController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id){
         model.addAttribute("businessUnit", businessUnitService.findOne(id));
-        model.addAttribute("header", "Agreements - edit"); //TODO Исправить хэдэры
+        model.addAttribute("header", "Изменение бизнес единицы");
         return "businessunits/edit";
     }
+
     @PostMapping("/{id}")
     public String update(@ModelAttribute("businessUnit") BusinessUnit businessUnit, @PathVariable("id") Long id){
         businessUnitService.update(id, businessUnit);

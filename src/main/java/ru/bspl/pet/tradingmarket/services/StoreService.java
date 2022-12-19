@@ -3,6 +3,8 @@ package ru.bspl.pet.tradingmarket.services;
 
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.Counterparty;
@@ -26,6 +28,10 @@ public class StoreService {
 
     public List<Store> findAll(){
         return storesRepo.findAll();
+    }
+
+    public Page<Store> findAll(int page, int size){
+        return storesRepo.findAll(PageRequest.of(page, size));
     }
 
     public Store findOne(Long id){

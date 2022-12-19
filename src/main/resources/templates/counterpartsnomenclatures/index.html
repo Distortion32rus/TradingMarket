@@ -5,29 +5,34 @@
     <th:block th:insert="common.html :: header"></th:block>
 </head>
 <body class="text-bg-dark p-3">
-<a href="counterpartsnomenclatures/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
-<table class="table table-dark table-hover">
-    <thead>
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Multiplicity</th>
-        <th scope="col">Nomenclature</th>
-        <th scope="col">Counterparty</th>
-        <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody >
-    <tr th:each="counterpartsNomenclature : ${counterpartsNomenclatures}">
-        <th th:text="${counterpartsNomenclature.getId()}"> id</th>
-        <td th:text="${counterpartsNomenclature.getName()}">name</td>
-        <td th:text="${counterpartsNomenclature.getMultiplicityOf()}">MultiplicityOf</td>
-        <td th:text="${counterpartsNomenclature.getNomenclature().getName()}">Nomenclature name</td>
-        <td th:text="${counterpartsNomenclature.getCounterparty().getName()}">Counterparty name</td>
-        <td><a th:href="@{/counterpartsnomenclatures/{id}/edit(id=${counterpartsNomenclature.getId()})}">Edit</a></td>
-    </tr>
-    </tbody>
-</table>
+    <a href="counterpartsnomenclatures/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Multiplicity</th>
+                <th scope="col">Nomenclature</th>
+                <th scope="col">Counterparty</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr th:each="counterpartsNomenclature : ${counterpartsNomenclaturePage.content}">
+                <th th:text="${counterpartsNomenclature.getId()}"> id</th>
+                <td th:text="${counterpartsNomenclature.getName()}">name</td>
+                <td th:text="${counterpartsNomenclature.getMultiplicityOf()}">MultiplicityOf</td>
+                <td th:text="${counterpartsNomenclature.getNomenclature().getName()}">Nomenclature name</td>
+                <td th:text="${counterpartsNomenclature.getCounterparty().getName()}">Counterparty name</td>
+                <td><a th:href="@{/counterpartsnomenclatures/{id}/edit(id=${counterpartsNomenclature.getId()})}">Edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <ul class="pagination pagination-sm" th:if="${counterpartsNomenclaturePage.totalPages > 0}">
+        <li class = "page-item active" th:each = "pageNumber : ${numbers}" th:class = "${pageNumber == counterpartsNomenclaturePage.number} ? 'page-item active' : 'page-item'" aria-current="page">
+            <a class="page-link" th:href="@{'/counterpartsnomenclatures?page=' + ${pageNumber}}" th:text="${pageNumber + 1} ">1</a>
+        </li>
+    </ul>
 </body>
 
 

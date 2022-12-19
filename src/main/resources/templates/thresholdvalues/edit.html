@@ -16,26 +16,32 @@
 
   <table class="table table-dark table-hover">
     <thead>
-    <tr>
-      <th scope="col">Threshold category</th>
-      <th scope="col">Min price</th>
-      <th scope="col">Max price</th>
-      <th scope="col">Deviation</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
+      <tr>
+        <th scope="col">Threshold category</th>
+        <th scope="col">Min price</th>
+        <th scope="col">Max price</th>
+        <th scope="col">Deviation</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
     </thead>
     <tbody>
-    <tr th:each="thresholdValueTable : ${thresholdValueTables}">
-      <th scope="row" th:text="${thresholdValueTable.getThresholdCategory()}">Threshold category</th>
-      <th scope="row" th:text="${thresholdValueTable.getMinPrice()}">Min price</th>
-      <th scope="row" th:text="${thresholdValueTable.getMaxPrice()}">Max price</th>
-      <td th:text="${thresholdValueTable.getDeviation()}">Deviation</td>
-      <td><a th:href="@{/thresholdvalues/{id}/{rowid}/edit(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}">Edit</a></td>
-      <td><a th:href="@{/thresholdvalues/{id}/{rowid}/delete(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}">Delete</a></td>
-    </tr>
+      <tr th:each="thresholdValueTable : ${thresholdValuesTablePage.content}">
+        <th scope="row" th:text="${thresholdValueTable.getThresholdCategory()}">Threshold category</th>
+        <th scope="row" th:text="${thresholdValueTable.getMinPrice()}">Min price</th>
+        <th scope="row" th:text="${thresholdValueTable.getMaxPrice()}">Max price</th>
+        <td th:text="${thresholdValueTable.getDeviation()}">Deviation</td>
+        <td><a th:href="@{/thresholdvalues/{id}/{rowid}/edit(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}">Edit</a></td>
+        <td><a th:href="@{/thresholdvalues/{id}/{rowid}/delete(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}">Delete</a></td>
+      </tr>
     </tbody>
   </table>
+  <ul class="pagination pagination-sm" th:if="${thresholdValuesTablePage.totalPages > 0}">
+    <li class = "page-item active" th:each = "pageNumber : ${numbers}" th:class = "${pageNumber == thresholdValuesTablePage.number} ? 'page-item active' : 'page-item'" aria-current="page">
+      <a class="page-link" th:href="@{'/thresholdvalues/{id}?page=' + ${pageNumber}(id=${thresholdValue.getId()})}" th:text="${pageNumber + 1} ">1</a>
+    </li>
+  </ul>
+
 
   <form th:method="DELETE" th:action="@{/thresholdvalues/{id}/delete(id=${thresholdValue.getId()})}" >
     <input type="submit" value="Delete"/>

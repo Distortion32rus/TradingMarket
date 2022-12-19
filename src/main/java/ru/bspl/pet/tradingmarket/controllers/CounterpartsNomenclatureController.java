@@ -1,5 +1,6 @@
 package ru.bspl.pet.tradingmarket.controllers;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,6 +8,8 @@ import ru.bspl.pet.tradingmarket.models.CounterpartsNomenclature;
 import ru.bspl.pet.tradingmarket.services.CounterpartsNomenclatureService;
 import ru.bspl.pet.tradingmarket.services.CounterpartyService;
 import ru.bspl.pet.tradingmarket.services.NomenclatureService;
+
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/counterpartsnomenclatures")
@@ -25,10 +28,20 @@ public class CounterpartsNomenclatureController {
         this.counterpartyService = counterpartyService;
     }
 
-    @GetMapping()
+    /*@GetMapping()
     public String show(Model model){
         model.addAttribute("counterpartsNomenclatures", counterpartsNomenclatureService.findAll());
-        model.addAttribute("header", "counterparts nomenclatures list");
+        model.addAttribute("header", "Список номенклатур поставщика");
+        return "counterpartsnomenclatures/index";
+    }*/
+
+    @GetMapping()
+    public String show(Model model,
+                       @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
+        Page<CounterpartsNomenclature> counterpartsNomenclaturePage = counterpartsNomenclatureService.findAll(page, 15);
+        model.addAttribute("counterpartsNomenclaturePage", counterpartsNomenclaturePage);
+        model.addAttribute("numbers", IntStream.range(0, counterpartsNomenclaturePage.getTotalPages()).toArray());
+        model.addAttribute("header", "Список номенклатур поставщика");
         return "counterpartsnomenclatures/index";
     }
 
@@ -37,7 +50,7 @@ public class CounterpartsNomenclatureController {
         model.addAttribute("counterpartsNomenclature", new CounterpartsNomenclature());
         model.addAttribute("nomenclatures", nomenclatureService.findAll());
         model.addAttribute("counterparties", counterpartyService.findAll());
-        model.addAttribute("header", "counterparts nomenclatures add new");
+        model.addAttribute("header", "Добавление номенклатуры поставщика");
         return "counterpartsnomenclatures/new";
     }
 
@@ -51,7 +64,7 @@ public class CounterpartsNomenclatureController {
         model.addAttribute("counterpartsNomenclature", counterpartsNomenclatureService.findOne(id));
         model.addAttribute("nomenclatures", nomenclatureService.findAll());
         model.addAttribute("counterparties", counterpartyService.findAll());
-        model.addAttribute("header", "Agreements - edit");  //TODO Испраовить хэдэры
+        model.addAttribute("header", "Изменение номенклатуры поставщика");
         return "counterpartsnomenclatures/edit";
     }
     @PostMapping("/{id}")

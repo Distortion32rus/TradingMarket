@@ -2,6 +2,8 @@ package ru.bspl.pet.tradingmarket.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.CounterpartsNomenclature;
@@ -25,6 +27,10 @@ public class PriceZoneService {
 
     public List<PriceZone> findAll(){
         return priceZoneRepo.findAll();
+    }
+
+    public Page<PriceZone> findAll(int page, int size){
+        return priceZoneRepo.findAll(PageRequest.of(page, size));
     }
 
     public PriceZone findOne(Long id){

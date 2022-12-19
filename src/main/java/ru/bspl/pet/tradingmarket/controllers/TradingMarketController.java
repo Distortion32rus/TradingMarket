@@ -31,14 +31,14 @@ public class TradingMarketController {
     @GetMapping()
     public String show(Model model){
         model.addAttribute("tradingMarkets", tradingMarketService.findAll());
-        model.addAttribute("header", "Trading markets list");
+        model.addAttribute("header", "Список торговых площадок");
         return "tradingmarkets/index";
     }
 
     @GetMapping("/new")
     public String addForm(Model model){
         model.addAttribute("tradingMarket", new TradingMarket());
-        model.addAttribute("header", "Trading markets  add new");
+        model.addAttribute("header", "Добавление торговой площадки");
         return "tradingmarkets/new";
     }
 
@@ -54,7 +54,7 @@ public class TradingMarketController {
         model.addAttribute("tradingMarket", tm);
         model.addAttribute("tradingMarketStores", tradingMarketStoresService.findByTradingMarket(tm));
         model.addAttribute("tradingMarketDistributions", tradingMarketDistributionService.findByTradingMarket(tm));
-        model.addAttribute("header", "Trading markets edit");
+        model.addAttribute("header", "Изменение торговой площадки");
         return "tradingmarkets/open";
     }
 
@@ -76,11 +76,10 @@ public class TradingMarketController {
     @GetMapping("/{id}/newstore")
     public String addFormNewStore(Model model, @PathVariable("id") Long id){
         TradingMarket tm = tradingMarketService.findOne(id);
-        //model.addAttribute("tradingMarketStore",new TradingMarketStores(new TradingMarketStoresId(tm, null), tm, null));
         model.addAttribute("tradingMarket",  tm);
         model.addAttribute("store",  new Store());
         model.addAttribute("stores", storeService.findAll());
-        model.addAttribute("header", "threshold values add new row");
+        model.addAttribute("header", "Добавление склада");
         return "tradingmarkets/newstore";
     }
 
@@ -103,7 +102,7 @@ public class TradingMarketController {
         model.addAttribute("tradingMarketStore", tradingMarketStore);
         model.addAttribute("store", tradingMarketStore.getStore());
         model.addAttribute("stores", storeService.findAll());
-        model.addAttribute("header", "Agreements-add new");
+        model.addAttribute("header", "Изменение склада");
         tradingMarketStoresService.deleteById(tradingMarketStoresId);
         return "tradingmarkets/storeedit";
     }

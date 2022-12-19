@@ -1,6 +1,8 @@
 package ru.bspl.pet.tradingmarket.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bspl.pet.tradingmarket.models.Agreement;
@@ -23,6 +25,10 @@ public class AgreementService {
 
     public List<Agreement> findAll(){
         return agreementRepo.findAll();
+    }
+
+    public Page<Agreement> findAll(int page, int size){
+        return agreementRepo.findAll(PageRequest.of(page, size));
     }
 
    public Agreement findOne(Long id){
