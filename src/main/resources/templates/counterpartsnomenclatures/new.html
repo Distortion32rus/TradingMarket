@@ -7,19 +7,27 @@
 <body class="text-bg-dark p-3">
 <div>
     <form th:method="POST" th:action="@{/counterpartsnomenclatures}" th:object="${counterpartsNomenclature}">
-        <label for="name">Enter name</label>
+        <label for="name">Введите наименование</label>
+        <br>
         <input type="text" th:field="*{name}" id="name"/>
-        <label for="multiplicityOf">Enter multiplicity Of</label>
+        <br>
+        <label for="multiplicityOf">Введите кратность поставки</label>
+        <br>
         <input type="text" th:field="*{multiplicityOf}" id="multiplicityOf"/>
-        <label for="nomenclature">Select nomenclature</label>
+        <br>
+        <label for="nomenclature">Выберите номенклатуру</label>
+        <br>
         <select th:field="*{nomenclature}" id="nomenclature">
             <option th:each="nomenclature : ${nomenclatures}" th:value="${nomenclature.getId()}" th:name="nomenclature" th:text="${nomenclature.getName()}"></option>
         </select>
-        <label for="counterparty">Select counterparty</label>
+        <br>
+        <label for="counterparty">Выберите поставщика</label>
+        <br>
         <select th:field="*{counterparty}" id="counterparty">
             <option th:each="counterparty : ${counterparties}" th:value="${counterparty.getId()}" th:name="counterparty" th:text="${counterparty.getName()}"></option>
         </select>
-        <input type="submit" value="Create!"/>
+        <br>
+        <input type="submit" value="Добавить"/>
     </form>
 </div>
 </body>

@@ -27,13 +27,6 @@ public class ThresholdValuesController {
         this.thresholdValuesTableService = thresholdValuesTableService;
     }
 
-    /*@GetMapping()
-    public String show(Model model){
-        model.addAttribute("thresholdvalues", thresholdValuesService.findAll());
-        model.addAttribute("header", "Список ведомостей ограничений");
-        return "thresholdvalues/index";
-    }*/
-
     @GetMapping()
     public String show(Model model,
                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
@@ -72,14 +65,14 @@ public class ThresholdValuesController {
         return "thresholdvalues/edit";
     }
 
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("thresholdvalue") ThresholdValues thresholdValues,
                          @PathVariable("id") Long id){
         thresholdValuesService.update(id, thresholdValues);
         return "redirect:/thresholdvalues";
     }
 
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         thresholdValuesTableService.deleteAll(thresholdValuesTableService.findByThresholdValueAll(thresholdValuesService.findOne(id)));
         thresholdValuesService.delete(id);
@@ -110,7 +103,7 @@ public class ThresholdValuesController {
         return "thresholdvalues/rowedit";
     }
 
-    @PostMapping("/{id}/{rowid}/edit")
+    @PatchMapping("/{id}/{rowid}/edit")
     public String updateRow(@ModelAttribute("thresholdvalue") ThresholdValuesTable thresholdValuesTable,
                          @PathVariable("id") Long id, @PathVariable("rowid") Long rowid){
         thresholdValuesTable.setId(rowid);
@@ -119,7 +112,7 @@ public class ThresholdValuesController {
         return "redirect:/thresholdvalues/"+id+"/edit";
     }
 
-    @GetMapping("/{id}/{rowid}/delete")
+    @DeleteMapping("/{id}/{rowid}")
     public String deleteRow(@PathVariable("id") Long id, @PathVariable("rowid") Long rowid){
         thresholdValuesTableService.delete(rowid);
         return "redirect:/thresholdvalues/"+id+"/edit";

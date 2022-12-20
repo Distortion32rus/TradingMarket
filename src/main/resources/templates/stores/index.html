@@ -5,24 +5,22 @@
     <th:block th:insert="common.html :: header"></th:block>
 </head>
 <body class="text-bg-dark p-3">
-    <a href="stores/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+    <a href="stores/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Добавить</a>
     <table class="table table-dark table-hover">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Priority</th>
-                <th scope="col">price zone</th>
-                <th scope="col">business unit</th>
-                <th scope="col">organization</th>
-                <th scope="col">Threshold val</th>
+                <th scope="col">Наименованние</th>
+                <th scope="col">Расшифровка</th>
+                <th scope="col">Приоритет</th>
+                <th scope="col">Ценовая зона</th>
+                <th scope="col">Бизнес единица</th>
+                <th scope="col">организация</th>
+                <th scope="col">Ведомость торговых ограничений</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="store : ${storePage.content}">
-                <th scope="row" th:text="${store.getId()}">Store id</th>
                 <td th:text="${store.getName()}">Store name</td>
                 <td th:text="${store.getDescription()}">Store description</td>
                 <td th:text="${store.getPriority()}">Store priority</td>
@@ -30,7 +28,7 @@
                 <td th:text="${store.getBusinessUnit().getName()}">Store business unit</td>
                 <td th:text="${store.getOrganization().getName()}">Store organization</td>
                 <td th:text="${store.getThresholdValues().getName()}">Store threshold values</td>
-                <td><a th:href="@{/stores/{id}/edit(id=${store.getId()})}">Edit</a></td>
+                <td><a th:href="@{/stores/{id}/edit(id=${store.getId()})}">Изменить</a></td>
             </tr>
         </tbody>
     </table>

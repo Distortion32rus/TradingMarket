@@ -6,7 +6,7 @@
 </head>
 <body class="text-bg-dark p-3">
 <div >
-    <form th:method="POST" th:action="@{/tradingmarkets/{id}/{storeid}/edit(id=${tradingMarketStore.getTradingMarket().getId()},storeid=${tradingMarketStore.getStore().getId()})}" th:object="${store}">
+    <form th:method="PATCH" th:action="@{/tradingmarkets/{id}/{storeid}(id=${tradingMarketStore.getTradingMarket().getId()},storeid=${tradingMarketStore.getStore().getId()})}" th:object="${store}">
     <label for="id">Select store</label>
     <select th:field="*{id}" id="id">
         <option th:each="str : ${stores}" th:value="${str.getId()}" th:name="id" th:text="${str.getName()}"></option>

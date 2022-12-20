@@ -9,36 +9,32 @@
     <a href="agreements/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
     <table class="table table-dark table-hover">
         <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Organization</th>
-            <th scope="col">Counterparty</th>
-            <th scope="col">Deferment of payment</th>
-            <th scope="col">Deferment rate</th>
-            <th scope="col">Min first order</th>
-            <th scope="col">Min second order</th>
-            <th scope="col"></th>
-        </tr>
+            <tr>
+                <th scope="col">Организация</th>
+                <th scope="col">Поставщик</th>
+                <th scope="col">Отсрочка платежа, дн</th>
+                <th scope="col">Ставка по отсрочке, %</th>
+                <th scope="col">Минимальная сумма первичного заказа</th>
+                <th scope="col">Минимальная сумма вторичных заказов</th>
+                <th scope="col"></th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="agreement : ${agreementPage.content}">
-            <th th:text="${agreement.getId()}">Id</th>
-            <td th:text="${agreement.getOrganization().getName()}">Organization</td>
-            <td th:text="${agreement.getCounterparty().getName()}">Counterparty</td>
-            <td th:text="${agreement.getDefermentOfPayment()}">Deferment of payment</td>
-            <td th:text="${agreement.getDefermentRate()}">Deferment rate</td>
-            <td th:text="${agreement.getMinFirstOrderAmoung()}">Min first order amoung</td>
-            <td th:text="${agreement.getMinSecondaryOrderAmoung()}">Min second order amoung</td>
-            <td><a th:href="@{/agreements/{id}/edit(id=${agreement.getId()})}">Edit</a></td>
-        </tr>
+            <tr th:each="agreement : ${agreementPage.content}">
+                <td th:text="${agreement.getOrganization().getName()}">Organization</td>
+                <td th:text="${agreement.getCounterparty().getName()}">Counterparty</td>
+                <td th:text="${agreement.getDefermentOfPayment()}">Deferment of payment</td>
+                <td th:text="${agreement.getDefermentRate()}">Deferment rate</td>
+                <td th:text="${agreement.getMinFirstOrderAmoung()}">Min first order amoung</td>
+                <td th:text="${agreement.getMinSecondaryOrderAmoung()}">Min second order amoung</td>
+                <td><a th:href="@{/agreements/{id}/edit(id=${agreement.getId()})}">Изменить</a></td>
+            </tr>
         </tbody>
     </table>
-
     <ul class="pagination pagination-sm" th:if="${agreementPage.totalPages > 0}">
         <li th:each = "pageNumber : ${numbers}" th:class = "${pageNumber == agreementPage.number} ? 'page-item active' : 'page-item'" aria-current="page">
             <a class="page-link" th:href="@{'/agreements?page=' + ${pageNumber}}" th:text="${pageNumber + 1} "></a>
         </li>
     </ul>
-
 </body>
 </html>

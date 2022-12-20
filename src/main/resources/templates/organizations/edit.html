@@ -7,15 +7,19 @@
 <body class="text-bg-dark p-3">
 <div>
   <form th:method="PATCH" th:action="@{/organizations/{id}(id=${organization.getId()})}" th:object="${organization}">
-    <label for="name">Enter name</label>
+    <label for="name">Введите наименовение</label>
+    <br>
     <input type="text" th:field="*{name}" id="name"/>
-    <label for="description">Enter description</label>
+    <br>
+    <label for="description">Введите примечание</label>
+    <br>
     <input type="text" th:field="*{description}" id="description"/>
-    <input type="submit" value="Update!"/>
+    <br>
+    <input type="submit" value="Изменить"/>
   </form>
   <br>
-  <form th:method="DELETE" th:action="@{/organizations/{id}/delete(id=${organization.getId()})}">
-    <input type="submit" value="Delete"/>
+  <form th:method="DELETE" th:action="@{/organizations/{id}(id=${organization.getId()})}">
+    <input type="submit" value="Удалить"/>
   </form>
 </div>
 </body>

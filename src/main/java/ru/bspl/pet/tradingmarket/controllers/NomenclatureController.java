@@ -25,13 +25,6 @@ public class NomenclatureController {
         this.assortmentPlanService = assortmentPlanService;
     }
 
-    /*@GetMapping()
-    public String show(Model model){
-        model.addAttribute("nomenclatures", nomenclatureService.findAll());
-        model.addAttribute("header", "Список номенклатуры");
-        return "nomenclatures/index";
-    }*/
-
     @GetMapping("")
     public String show(Model model,
                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
@@ -63,12 +56,12 @@ public class NomenclatureController {
         model.addAttribute("header", "Изменение номенклатуры");
         return "nomenclatures/edit";
     }
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("nomenclature") Nomenclature nomenclature, @PathVariable("id") Long id){
         nomenclatureService.update(id, nomenclature);
         return "redirect:/nomenclatures";
     }
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         nomenclatureService.delete(id);
         return "redirect:/nomenclatures";

@@ -6,21 +6,21 @@
 </head>
 <body class="text-bg-dark p-3">
 <div >
-  <form th:method="POST" th:action="@{/thresholdvalues/{id}(id=${thresholdValue.getId()})}" th:object="${thresholdValue}">
-    <label for="name">Enter name</label>
+  <form th:method="PATCH" th:action="@{/thresholdvalues/{id}(id=${thresholdValue.getId()})}" th:object="${thresholdValue}">
+    <label for="name">Введите наименование</label>
     <input type="text" th:field="*{name}" id="name"/>
-    <input type="submit" value="Save!"/>
+    <input type="submit" value="Изменить"/>
   </form>
 
-  <a th:href="@{/thresholdvalues/{id}/newrow(id=${thresholdValue.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+  <a th:href="@{/thresholdvalues/{id}/newrow(id=${thresholdValue.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Добавить</a>
 
   <table class="table table-dark table-hover">
     <thead>
       <tr>
-        <th scope="col">Threshold category</th>
-        <th scope="col">Min price</th>
-        <th scope="col">Max price</th>
-        <th scope="col">Deviation</th>
+        <th scope="col">Категория ограничений</th>
+        <th scope="col">Мин цена диапазона</th>
+        <th scope="col">Макс цена диапазона</th>
+        <th scope="col">Отклонение</th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
@@ -31,8 +31,12 @@
         <th scope="row" th:text="${thresholdValueTable.getMinPrice()}">Min price</th>
         <th scope="row" th:text="${thresholdValueTable.getMaxPrice()}">Max price</th>
         <td th:text="${thresholdValueTable.getDeviation()}">Deviation</td>
-        <td><a th:href="@{/thresholdvalues/{id}/{rowid}/edit(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}">Edit</a></td>
-        <td><a th:href="@{/thresholdvalues/{id}/{rowid}/delete(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}">Delete</a></td>
+        <td><a th:href="@{/thresholdvalues/{id}/{rowid}/edit(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}">Изменить</a></td>
+        <td>
+          <form th:method="DELETE" th:action="@{/thresholdvalues/{id}/{rowid}(id=${thresholdValueTable.getThresholdValues().getId()},rowid=${thresholdValueTable.getId()})}" >
+            <input type="submit" value="Удалить"/>
+          </form>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -41,12 +45,9 @@
       <a class="page-link" th:href="@{'/thresholdvalues/{id}?page=' + ${pageNumber}(id=${thresholdValue.getId()})}" th:text="${pageNumber + 1} ">1</a>
     </li>
   </ul>
-
-
-  <form th:method="DELETE" th:action="@{/thresholdvalues/{id}/delete(id=${thresholdValue.getId()})}" >
-    <input type="submit" value="Delete"/>
+  <form th:method="DELETE" th:action="@{/thresholdvalues/{id}(id=${thresholdValue.getId()})}" >
+    <input type="submit" value="Удалить"/>
   </form>
-
 </div>
 </body>
 </html>

@@ -6,28 +6,40 @@
 </head>
 <body class="text-bg-dark p-3">
 <div>
-  <form th:method="POST" th:action="@{/agreements/{id}(id=${agreement.getId()})}" th:object="${agreement}">
-    <label for="organization">Select organization</label>
+  <form th:method="PATCH" th:action="@{/agreements/{id}(id=${agreement.getId()})}" th:object="${agreement}">
+    <label for="organization">Выберите организацию</label>
+    <br>
     <select th:field="*{organization}" id="organization">
       <option th:each="organization : ${organizations}" th:value="${organization.getId()}" th:name="organization" th:text="${organization.getName()}"></option>
     </select>
-    <label for="counterparty">Select counterparty</label>
+    <br>
+    <label for="counterparty">Выберите поставщика</label>
+    <br>
     <select th:field="*{counterparty}" id="counterparty">
       <option th:each="counterparty : ${counterparties}" th:value="${counterparty.getId()}" th:name="counterparty" th:text="${counterparty.getName()}"></option>
     </select>
-    <label for="defermentOfPayment">Enter deferment Of Payment</label>
+    <br>
+    <label for="defermentOfPayment">Введите острочку платежа, дн</label>
+    <br>
     <input type="text" th:field="*{defermentOfPayment}" id="defermentOfPayment"/>
-    <label for="defermentRate">Enter deferment rate</label>
+    <br>
+    <label for="defermentRate">Введите ставку по отсрочке, %</label>
+    <br>
     <input type="text" th:field="*{defermentRate}" id="defermentRate"/>
-    <label for="minFirstOrderAmoung">Enter minFirstOrderAmoung</label>
+    <br>
+    <label for="minFirstOrderAmoung">Введите минимальную сумму первичного заказа</label>
+    <br>
     <input type="text" th:field="*{minFirstOrderAmoung}" id="minFirstOrderAmoung"/>
-    <label for="minSecondaryOrderAmoung">Enter minSecondaryOrderAmoung</label>
+    <br>
+    <label for="minSecondaryOrderAmoung">Введите минимальную сумму вторичных заказов</label>
+    <br>
     <input type="text" th:field="*{minSecondaryOrderAmoung}" id="minSecondaryOrderAmoung"/>
-    <input type="submit" value="Create!"/>
+    <br>
+    <input type="submit" value="Добавить!"/>
   </form>
   <br>
-  <form th:method="DELETE" th:action="@{/agreements/{id}/delete(id=${agreement.getId()})}">
-    <input type="submit" value="Delete"/>
+  <form th:method="DELETE" th:action="@{/agreements/{id}(id=${agreement.getId()})}">
+    <input type="submit" value="Удалить"/>
   </form>
 </div>
 </body>

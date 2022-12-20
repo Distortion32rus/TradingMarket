@@ -7,34 +7,48 @@
 </head>
 <body class="text-bg-dark p-3">
 <div>
-    <form th:method="POST" th:action="@{/stores/{id}(id=${store.getId()})}"  th:object="${store}">
-        <label for="name">Enter name</label>
+    <form th:method="PATCH" th:action="@{/stores/{id}(id=${store.getId()})}"  th:object="${store}">
+        <label for="name">Введите наименование</label>
+        <br>
         <input type="text" th:field="*{name}" id="name"/>
-        <label for="description">Enter description</label>
+        <br>
+        <label for="description">Введите примечание</label>
+        <br>
         <input type="text" th:field="*{description}" id="description"/>
-        <label for="priority">Enter priority</label>
+        <br>
+        <label for="priority">Введите приоритет</label>
+        <br>
         <input type="text" th:field="*{priority}" id="priority"/>
-        <label for="priceZone">Select price zone</label>
+        <br>
+        <label for="priceZone">Выберите ценовую зону</label>
+        <br>
         <select th:field="*{priceZone}" id="priceZone">
             <option th:each="priceZone : ${priseZones}" th:value="${priceZone.getId()}" th:name="priceZone" th:text="${priceZone.getName()}"></option>
         </select>
-        <label for="thresholdValues">Select threshold values</label>
+        <br>
+        <label for="thresholdValues">Выберите ведомость ограничений</label>
+        <br>
         <select th:field="*{thresholdValues}" id="thresholdValues">
             <option th:each="thresholdValue : ${thresholdValues}" th:value="${thresholdValue.getId()}" th:name="thresholdValues" th:text="${thresholdValue.getName()}"></option>
         </select>
-        <label for="businessUnit">Select business unit</label>
+        <br>
+        <label for="businessUnit">Выберите бизнес единицу</label>
+        <br>
         <select th:field="*{businessUnit}" id="businessUnit">
             <option th:each="businessUnit : ${businessUnits}" th:value="${businessUnit.getId()}" th:name="businessUnit" th:text="${businessUnit.getName()}"></option>
         </select>
-        <label for="organization">Select organization</label>
+        <br>
+        <label for="organization">Выберите организацию</label>
+        <br>
         <select th:field="*{organization}" id="organization">
             <option th:each="organization : ${organizations}" th:value="${organization.getId()}" th:name="organization" th:text="${organization.getName()}"></option>
         </select>
-        <input type="submit" value="Create!"/>
+        <br>
+        <input type="submit" value="Изменить"/>
     </form>
     <br>
-    <form th:method="DELETE" th:action="@{/stores/{id}/delete(id=${store.getId()})}" >
-        <input type="submit" value="Delete"/>
+    <form th:method="DELETE" th:action="@{/stores/{id}(id=${store.getId()})}" >
+        <input type="submit" value="Удалить"/>
     </form>
 </div>
 </body>

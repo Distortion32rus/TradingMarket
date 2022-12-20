@@ -5,20 +5,18 @@
     <th:block th:insert="common.html :: header"></th:block>
 </head>
 <body class="text-bg-dark p-3">
-    <a href="typesofassortmentplans/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+    <a href="typesofassortmentplans/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Добавить</a>
     <table class="table table-dark table-hover">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
+                <th scope="col">Наименование</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody >
             <tr th:each="typeofassortmentplans : ${typeOfAssortmentPlansPage.content}">
-                <th th:text="${typeofassortmentplans.getId()}">typeofassortmentplans  id</th>
                 <td th:text="${typeofassortmentplans.getName()}">typeofassortmentplans name</td>
-                <td> <a th:href="@{/typesofassortmentplans/{id}/edit(id=${typeofassortmentplans.getId()})}">Edit</a></td>
+                <td> <a th:href="@{/typesofassortmentplans/{id}/edit(id=${typeofassortmentplans.getId()})}">Изменить</a></td>
             </tr>
         </tbody>
     </table>

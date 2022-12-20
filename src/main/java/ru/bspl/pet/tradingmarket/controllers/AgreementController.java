@@ -27,13 +27,6 @@ public class AgreementController {
         this.counterpartyService = counterpartyService;
     }
 
-    /*@GetMapping()
-    public String show(Model model) {
-        model.addAttribute("agreements", agreementService.findAll());
-        model.addAttribute("header", "Список соглашений");
-        return "agreements/index";
-    }*/
-
     @GetMapping()
     public String show(Model model,
                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page) {
@@ -68,13 +61,13 @@ public class AgreementController {
         return "agreements/edit";
     }
 
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("agreement") Agreement agreement, @PathVariable("id") Long id) {
         agreementService.update(id, agreement);
         return "redirect:/agreements";
     }
 
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id) {
         agreementService.delete(id);
         return "redirect:/agreements";

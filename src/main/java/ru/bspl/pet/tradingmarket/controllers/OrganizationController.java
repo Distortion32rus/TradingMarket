@@ -22,13 +22,6 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
 
-    /*@GetMapping()
-    public String show(Model model){
-        model.addAttribute("organizations", organizationService.findAll());
-        model.addAttribute("header", "Список организаций");
-        return "organizations/index";
-    }*/
-
     @GetMapping()
     public String show(Model model,
                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
@@ -57,12 +50,12 @@ public class OrganizationController {
         model.addAttribute("header", "Изменение организации");
         return "organizations/edit";
     }
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("organization") Organization organization, @PathVariable("id") Long id){
         organizationService.update(id, organization);
         return "redirect:/organizations";
     }
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         organizationService.delete(id);
         return "redirect:/organizations";

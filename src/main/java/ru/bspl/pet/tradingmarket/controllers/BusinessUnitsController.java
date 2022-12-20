@@ -21,14 +21,6 @@ public class BusinessUnitsController {
         this.businessUnitService = businessUnitService;
     }
 
-    /*@GetMapping
-    public String show(Model model){
-        Iterable<BusinessUnit> businessUnits = businessUnitService.findAll();
-        model.addAttribute("businessUnits", businessUnits);
-        model.addAttribute("header", "Список бизнес единиц");
-        return "businessunits/index";
-    }*/
-
     @GetMapping
     public String show(Model model,
                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
@@ -61,12 +53,12 @@ public class BusinessUnitsController {
         return "businessunits/edit";
     }
 
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("businessUnit") BusinessUnit businessUnit, @PathVariable("id") Long id){
         businessUnitService.update(id, businessUnit);
         return "redirect:/businessunits";
     }
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         businessUnitService.delete(id);
         return "redirect:/businessunits";

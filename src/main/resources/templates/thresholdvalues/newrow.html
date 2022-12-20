@@ -7,17 +7,25 @@
 <body class="text-bg-dark p-3">
 <div>
   <form th:method="POST" th:action="@{/thresholdvalues/{id}/newrow(id=${thresholdValuesTable.getThresholdValues().getId()})}" th:object="${thresholdValuesTable}">
-    <label for="thresholdCategory">Select category</label>
+    <label for="thresholdCategory">Выберите категорию</label>
+    <br>
     <select th:field="*{thresholdCategory}" id="thresholdCategory">
       <option th:each="thresholdCategory : ${thresholdCategories}" th:value="${thresholdCategory}" th:name="thresholdCategory" th:text="${thresholdCategory.getName()}"></option>
     </select>
-    <label for="minPrice">Enter minPrice</label>
+    <br>
+    <label for="minPrice">Введите мин цену диапазона</label>
+    <br>
     <input type="text" th:field="*{minPrice}" id="minPrice"/>
-    <label for="maxPrice">Enter maxPrice</label>
+    <br>
+    <label for="maxPrice">Введите макс цену диапазона</label>
+    <br>
     <input type="text" th:field="*{maxPrice}" id="maxPrice"/>
-    <label for="deviation">Enter deviation</label>
+    <br>
+    <label for="deviation">Введите отклонение</label>
+
     <input type="text" th:field="*{deviation}" id="deviation"/>
-    <input type="submit" value="Create!"/>
+    <br>
+    <input type="submit" value="Добавить"/>
   </form>
 </div>
 </body>

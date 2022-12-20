@@ -7,13 +7,17 @@
 <body class="text-bg-dark p-3">
 <div>
     <form th:method="POST" th:action="@{/nomenclatures}" th:object="${nomenclature}">
-        <label for="name">Enter name</label>
+        <label for="name">Введите наименование</label>
+        <br>
         <input type="text" th:field="*{name}" id="name"/>
-        <label for="assortmentPlan">Select assortment plan</label>
+        <br>
+        <label for="assortmentPlan">Выберите ассортиментный план</label>
+        <br>
         <select th:field="*{assortmentPlan}" id="assortmentPlan">
             <option th:each="assortmentPlan : ${assortmentPlans}" th:value="${assortmentPlan.getId()}" th:name="assortmentPlan" th:text="${assortmentPlan.getName()}"></option>
         </select>
-        <input type="submit" value="Create!"/>
+        <br>
+        <input type="submit" value="Добавить"/>
     </form>
 </div>
 </body>
