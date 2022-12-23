@@ -6,16 +6,20 @@
 </head>
 <body class="text-bg-dark p-3">
 <div>
-  <form th:method="POST"  th:action="@{/counterparties/{id}(id=${counterparty.getId()})}" th:object="${counterparty}">
-    <label for="name">Enter name</label>
+  <form th:method="PATCH"  th:action="@{/counterparties/{id}(id=${counterparty.getId()})}" th:object="${counterparty}">
+    <label for="name">Введите наименование</label>
+    <br>
     <input type="text" th:field="*{name}" id="name"/>
-    <label for="description">Enter description</label>
+    <br>
+    <label for="description">Введите примечание</label>
+    <br>
     <input type="text" th:field="*{description}" id="description"/>
-    <input type="submit" value="Create!"/>
+    <br>
+    <input type="submit" value="Изменить"/>
   </form>
   <br>
-  <form th:method="DELETE" th:action="@{/counterparties/{id}/delete(id=${counterparty.getId()})}">
-    <input type="submit" value="Delete"/>
+  <form th:method="DELETE" th:action="@{/counterparties/{id}(id=${counterparty.getId()})}">
+    <input type="submit" value="Удалить"/>
   </form>
 </div>
 </body>

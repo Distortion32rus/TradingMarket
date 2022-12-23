@@ -28,13 +28,6 @@ public class OrderController {
         this.orderPositionService = orderPositionService;
     }
 
-    /*@GetMapping()
-    public String show(Model model){
-        model.addAttribute("orders", orderService.findAll());
-        model.addAttribute("header", "Список заказов");
-        return "orders/index";
-    }*/
-
     @GetMapping()
     public String show(Model model,
                        @RequestParam(name="page", required = false, defaultValue = "0") Integer page){

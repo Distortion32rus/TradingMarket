@@ -58,13 +58,13 @@ public class TradingMarketController {
         return "tradingmarkets/open";
     }
 
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("tradingMarket") TradingMarket tradingMarket, @PathVariable("id") Long id){
         tradingMarketService.update(id, tradingMarket);
         return "redirect:/tradingmarkets";
     }
 
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         TradingMarket tm = tradingMarketService.findOne(id);
         tradingMarketStoresService.deleteAll(tradingMarketStoresService.findByTradingMarket(tm));
@@ -107,7 +107,7 @@ public class TradingMarketController {
         return "tradingmarkets/storeedit";
     }
 
-    @PostMapping("/{id}/{storeid}/edit")
+    @PatchMapping("/{id}/{storeid}")
     public String updateRow(@ModelAttribute("store") Store store,
                             @PathVariable("id") Long id){
         TradingMarket tm = tradingMarketService.findOne(id);
@@ -119,7 +119,7 @@ public class TradingMarketController {
         return "redirect:/tradingmarkets/"+id+"/open";
     }
 
-    @GetMapping("/{id}/{storeid}/delete")
+    @DeleteMapping("/{id}/{storeid}")
     public String deleteRow(@PathVariable("id") Long id, @PathVariable("storeid") Long storeId){
         tradingMarketStoresService.deleteById(new TradingMarketStoresId(tradingMarketService.findOne(id),storeService.findOne(storeId)));
         return "redirect:/tradingmarkets/"+id+"/open";
@@ -146,6 +146,4 @@ public class TradingMarketController {
 
         return "redirect:/tradingmarkets/"+id+"/open";
     }
-
-
 }

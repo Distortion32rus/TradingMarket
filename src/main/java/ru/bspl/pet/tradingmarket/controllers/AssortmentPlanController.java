@@ -25,14 +25,6 @@ public class AssortmentPlanController {
         this.assortmentPlanService = assortmentPlanService;
         this.typeOfAssortmentPlansService = typeOfAssortmentPlansService;
     }
-
-    /*@GetMapping()
-    public String show(Model model){
-        model.addAttribute("assortmentPlans", assortmentPlanService.findAll());
-        model.addAttribute("header", "Список ассортиментных планов");
-        return "assortmentplans/index";
-    }*/
-
     @GetMapping()
     public String show(Model model,
                        @RequestParam(name="page", required = false, defaultValue = "0") Integer page){
@@ -64,12 +56,12 @@ public class AssortmentPlanController {
         model.addAttribute("header", "Изменение ассортиментного плана");
         return "assortmentplans/edit";
     }
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("assortmentPlan") AssortmentPlan assortmentPlan, @PathVariable("id") Long id){
         assortmentPlanService.update(id, assortmentPlan);
         return "redirect:/assortmentplans";
     }
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         assortmentPlanService.delete(id);
         return "redirect:/assortmentplans";

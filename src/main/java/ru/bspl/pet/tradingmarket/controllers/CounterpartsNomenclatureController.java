@@ -28,13 +28,6 @@ public class CounterpartsNomenclatureController {
         this.counterpartyService = counterpartyService;
     }
 
-    /*@GetMapping()
-    public String show(Model model){
-        model.addAttribute("counterpartsNomenclatures", counterpartsNomenclatureService.findAll());
-        model.addAttribute("header", "Список номенклатур поставщика");
-        return "counterpartsnomenclatures/index";
-    }*/
-
     @GetMapping()
     public String show(Model model,
                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
@@ -67,12 +60,12 @@ public class CounterpartsNomenclatureController {
         model.addAttribute("header", "Изменение номенклатуры поставщика");
         return "counterpartsnomenclatures/edit";
     }
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("counterpartsNomenclature") CounterpartsNomenclature counterpartsNomenclature, @PathVariable("id") Long id){
         counterpartsNomenclatureService.update(id, counterpartsNomenclature);
         return "redirect:/counterpartsnomenclatures";
     }
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         counterpartsNomenclatureService.delete(id);
         return "redirect:/counterpartsnomenclatures";

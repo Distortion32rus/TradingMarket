@@ -6,93 +6,95 @@
 </head>
 <body class="text-bg-dark p-3">
 <div >
-    <form th:method="POST" th:action="@{/tradingmarkets/{id}(id=${tradingMarket.getId()})}" th:object="${tradingMarket}">
-        <label for="name">Enter name</label>
+    <form th:method="PATCH" th:action="@{/tradingmarkets/{id}(id=${tradingMarket.getId()})}" th:object="${tradingMarket}">
+        <label for="name">Введите наименование</label>
         <input type="text" th:field="*{name}" id="name"/>
-        <input type="submit" value="Save!"/>
+        <input type="submit" value="Изменить"/>
     </form>
 
-    <a th:href="@{/tradingmarkets/{id}/newstore(id=${tradingMarket.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+    <a th:href="@{/tradingmarkets/{id}/newstore(id=${tradingMarket.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Добавить склад</a>
 
     <table class="table table-dark table-hover">
         <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
+            <tr>
+                <th scope="col">Склад</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="store : ${tradingMarketStores}">
-            <th scope="row" th:text="${store.getStore().getName()}">Name</th>
-            <td><a th:href="@{/tradingmarkets/{id}/{storeid}/edit(id=${store.getTradingMarket().getId()},storeid=${store.getStore().getId()})}">Edit</a></td>
-            <td><a th:href="@{/tradingmarkets/{id}/{storeid}/delete(id=${store.getTradingMarket().getId()},storeid=${store.getStore().getId()})}">Delete</a></td>
-        </tr>
+            <tr th:each="store : ${tradingMarketStores}">
+                <th scope="row" th:text="${store.getStore().getName()}">Наименование</th>
+                <td><a th:href="@{/tradingmarkets/{id}/{storeid}/edit(id=${store.getTradingMarket().getId()},storeid=${store.getStore().getId()})}">Изменить склад</a></td>
+                <td>
+                    <form th:method="DELETE" th:action="@{/tradingmarkets/{id}/{storeid}(id=${store.getTradingMarket().getId()},storeid=${store.getStore().getId()})}" >
+                        <input type="submit" value="Удалить"/>
+                    </form>
+                </td>
+            </tr>
         </tbody>
     </table>
     <br>
 
-    <a th:href="@{/tradingmarkets/{id}/calc(id=${tradingMarket.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Calc</a>
+    <a th:href="@{/tradingmarkets/{id}/calc(id=${tradingMarket.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Выполнить расчет</a>
     <br>
-    <a th:href="@{/tradingmarkets/{id}/createorders(id=${tradingMarket.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Create orders</a>
+    <a th:href="@{/tradingmarkets/{id}/createorders(id=${tradingMarket.getId()})}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Создать заказы</a>
 
     <table class="table table-dark table-hover">
         <thead>
-        <tr>
-            <th scope="col">Store</th>
-            <th scope="col">AP</th>
-            <th scope="col">Counterparty</th>
-            <th scope="col">Counter nomen</th>
-            <th scope="col">DemandQNT</th>
-            <th scope="col">Multiplicity</th>
-            <th scope="col">RoundDemand</th>
-            <th scope="col">OnStock</th>
-            <th scope="col">CounterpStock</th>
-            <th scope="col">CounterPrice</th>
-            <th scope="col">ShelfLife</th>
-            <th scope="col">ConvertedPrice</th>
-            <th scope="col">BestPrice</th>
-            <th scope="col">SalesSpeed</th>
-            <th scope="col">InPriceControl</th>
-            <th scope="col">NomenCompControl</th>
-            <th scope="col">ShelfLifeControl</th>
-            <th scope="col">MultiplicityControl</th>
-            <th scope="col">MinSupplBalControl</th>
-            <th scope="col">MaxStockControl</th>
-            <th scope="col">BestPriceControl</th>
-        </tr>
+            <tr>
+                <th scope="col">Склад</th>
+                <th scope="col">АП</th>
+                <th scope="col">Поставщик</th>
+                <th scope="col">Номен пост</th>
+                <th scope="col">Кол-во в потр</th>
+                <th scope="col">Кратность</th>
+                <th scope="col">Округл потр</th>
+                <th scope="col">Сток склада</th>
+                <th scope="col">Сток пост</th>
+                <th scope="col">Цена пост</th>
+                <th scope="col">Срок годности</th>
+                <th scope="col">Привед цена</th>
+                <th scope="col">Лучшая цена</th>
+                <th scope="col">Скорость</th>
+                <th scope="col">Есть в прайсе</th>
+                <th scope="col">Сопоставлена номенклатура</th>
+                <th scope="col">Контроль СГ</th>
+                <th scope="col">Контроль кратности</th>
+                <th scope="col">Контроль мин остатка</th>
+                <th scope="col">Контроль макс остатка</th>
+                <th scope="col">Контроль лучшей цены</th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="tradingMarketDistribution : ${tradingMarketDistributions}">
-            <th scope="row" th:text="${tradingMarketDistribution.getStore().getName()}">Threshold category</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getAssortmentPlan().getName()}">Min price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getCounterparty().getName()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getCounterpartsNomenclature().getName()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getDemandQNT()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getMultiplicityOf()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getRoundDemandQNT()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getOnStockQNT()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getCounterpartiesStock()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getCounterpartiesPrice()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getShelfLife()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getConvertedPrice()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getBestPrice()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.getSalesSpeed()}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.isInPriceControl() ? '+' : '-'}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.isNomenComparitionControl() ? '+' : '-'}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.isShelfLifeControl() ? '+' : '-'}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.isMultiplicityControl() ? '+' : '-'}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.isMinSupplBalanceControl() ? '+' : '-'}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.isMaxStockControl() ? '+' : '-'}">Max price</th>
-            <th scope="row" th:text="${tradingMarketDistribution.isBestPriceControl() ? '+' : '-'}">Max price</th>
-        </tr>
+            <tr th:each="tradingMarketDistribution : ${tradingMarketDistributions}">
+                <th scope="row" th:text="${tradingMarketDistribution.getStore().getName()}">Threshold category</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getAssortmentPlan().getName()}">Min price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getCounterparty().getName()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getCounterpartsNomenclature().getName()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getDemandQNT()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getMultiplicityOf()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getRoundDemandQNT()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getOnStockQNT()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getCounterpartiesStock()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getCounterpartiesPrice()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getShelfLife()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getConvertedPrice()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getBestPrice()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.getSalesSpeed()}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.isInPriceControl() ? '+' : '-'}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.isNomenComparitionControl() ? '+' : '-'}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.isShelfLifeControl() ? '+' : '-'}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.isMultiplicityControl() ? '+' : '-'}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.isMinSupplBalanceControl() ? '+' : '-'}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.isMaxStockControl() ? '+' : '-'}">Max price</th>
+                <th scope="row" th:text="${tradingMarketDistribution.isBestPriceControl() ? '+' : '-'}">Max price</th>
+            </tr>
         </tbody>
     </table>
-
-    <form th:method="DELETE" th:action="@{/tradingmarkets/{id}/delete(id=${tradingMarket.getId()})}" >
-        <input type="submit" value="Delete"/>
+    <form th:method="DELETE" th:action="@{/tradingmarkets/{id}(id=${tradingMarket.getId()})}" >
+        <input type="submit" value="Удалить"/>
     </form>
-
 </div>
 </body>
 </html>

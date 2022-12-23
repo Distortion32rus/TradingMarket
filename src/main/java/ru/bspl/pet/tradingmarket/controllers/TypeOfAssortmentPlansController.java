@@ -23,14 +23,7 @@ public class TypeOfAssortmentPlansController {
         this.typeOfAssortmentPlansService = typeOfAssortmentPlansService;
     }
 
-    /*@GetMapping("")
-    public String show(Model model){
-        model.addAttribute("typesofassortmentplans", typeOfAssortmentPlansService.findAll());
-        model.addAttribute("header", "Список типов ассортиментных планов");
-        return "typesofassortmentplans/index";
-    }*/
-
-    @GetMapping("")
+    @GetMapping()
     public String show(Model model,
                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
         Page<TypeOfAssortmentPlans> typeOfAssortmentPlansPage = typeOfAssortmentPlansService.findAll(page, 15);
@@ -47,23 +40,27 @@ public class TypeOfAssortmentPlansController {
         model.addAttribute("header", "Добавление типа ассортиментного плана");
         return "typesofassortmentplans/new";
     }
+
     @PostMapping()
     public String add(@ModelAttribute("typeOfAssortmentPlans") TypeOfAssortmentPlans typeOfAssortmentPlans){
         typeOfAssortmentPlansService.save(typeOfAssortmentPlans);
         return "redirect:/typesofassortmentplans";
     }
+
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id){
         model.addAttribute("typeOfAssortmentPlans", typeOfAssortmentPlansService.findOne(id));
         model.addAttribute("header", "Изменение типа ассортиментного плана");
         return "typesofassortmentplans/edit";
     }
-    @PostMapping("/{id}")
+
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("typeOfAssortmentPlans") TypeOfAssortmentPlans typeOfAssortmentPlans, @PathVariable("id") Long id){
         typeOfAssortmentPlansService.update(id, typeOfAssortmentPlans);
         return "redirect:/typesofassortmentplans";
     }
-    @PostMapping("/{id}/delete")
+
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         typeOfAssortmentPlansService.delete(id);
         return "redirect:/typesofassortmentplans";

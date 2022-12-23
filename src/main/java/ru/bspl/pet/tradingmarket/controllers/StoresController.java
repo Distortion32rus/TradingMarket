@@ -33,13 +33,6 @@ public class StoresController {
         this.thresholdValuesService = thresholdValuesService;
     }
 
-    /*@GetMapping()
-    public String show(Model model){
-        model.addAttribute("stores", storeService.findAll());
-        model.addAttribute("header", "Список складов");
-        return "stores/index";
-    }*/
-
     @GetMapping()
     public String show(Model model,
                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
@@ -78,12 +71,12 @@ public class StoresController {
         model.addAttribute("header", "Изменение склада");
         return "stores/edit";
     }
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("store") Store store, @PathVariable("id") Long id){
         storeService.update(id, store);
         return "redirect:/stores";
     }
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         storeService.delete(id);
         return "redirect:/stores";

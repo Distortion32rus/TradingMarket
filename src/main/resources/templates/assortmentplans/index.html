@@ -5,23 +5,21 @@
     <th:block th:insert="common.html :: header"></th:block>
 </head>
 <body class="text-bg-dark p-3">
-    <a href="assortmentplans/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Add</a>
+    <a href="assortmentplans/new" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Добавить</a>
     <table class="table table-dark table-hover">
         <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Type of AP</th>
-            <th scope="col"></th>
-        </tr>
+            <tr>
+                <th scope="col">Наименование</th>
+                <th scope="col">Тип ассортиментного плана</th>
+                <th scope="col"></th>
+            </tr>
         </thead>
         <tbody >
-        <tr th:each="assortmentplan : ${assortmentPlanPage.content}">
-            <th th:text="${assortmentplan.getId()}">typeofassortmentplans  id</th>
-            <td th:text="${assortmentplan.getName()}">typeofassortmentplans name</td>
-            <td th:text="${assortmentplan.getTypeOfAssortmentPlans().getName()}">typeofassortmentplans name</td>
-            <td><a th:href="@{/assortmentplans/{id}/edit(id=${assortmentplan.getId()})}">Edit</a></td>
-        </tr>
+            <tr th:each="assortmentplan : ${assortmentPlanPage.content}">
+                <td th:text="${assortmentplan.getName()}">typeofassortmentplans name</td>
+                <td th:text="${assortmentplan.getTypeOfAssortmentPlans().getName()}">typeofassortmentplans name</td>
+                <td><a th:href="@{/assortmentplans/{id}/edit(id=${assortmentplan.getId()})}">Edit</a></td>
+            </tr>
         </tbody>
     </table>
     <ul class="pagination pagination-sm" th:if="${assortmentPlanPage.totalPages > 0}">

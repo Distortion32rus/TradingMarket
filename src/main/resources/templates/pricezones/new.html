@@ -7,11 +7,15 @@
 <body class="text-bg-dark p-3">
 <div>
     <form th:method="POST" th:action="@{/pricezones}" th:object="${priceZone}">
-        <label for="name">Enter name</label>
+        <label for="name">Введите наименование</label>
+        <br>
         <input type="text" th:field="*{name}" id="name"/>
-        <label for="description">Enter description</label>
+        <br>
+        <label for="description">Введите примечание</label>
+        <br>
         <input type="text" th:field="*{description}" id="description"/>
-        <input type="submit" value="Create!"/>
+        <br>
+        <input type="submit" value="Добавить"/>
     </form>
 </div>
 </body>

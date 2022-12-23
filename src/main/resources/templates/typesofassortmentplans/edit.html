@@ -6,14 +6,14 @@
 </head>
 <body class="text-bg-dark p-3">
 <div>
-  <form th:method="POST" th:action="@{/typesofassortmentplans/{id}(id=${typeOfAssortmentPlans.getId()})}" th:object="${typeOfAssortmentPlans}">
-    <label for="name">Enter name</label>
+  <form th:method="PATCH" th:action="@{/typesofassortmentplans/{id}(id=${typeOfAssortmentPlans.getId()})}" th:object="${typeOfAssortmentPlans}">
+    <label for="name">Введите наименование</label>
     <input type="text" th:field="*{name}" id="name"/>
-    <input type="submit" value="Create!"/>
+    <input type="submit" value="Изменить"/>
   </form>
   <br>
-  <form th:method="DELETE" th:action="@{/typesofassortmentplans/{id}/delete(id=${typeOfAssortmentPlans.getId()})}">
-    <input type="submit" value="Delete"/>
+  <form th:method="DELETE" th:action="@{/typesofassortmentplans/{id}(id=${typeOfAssortmentPlans.getId()})}">
+    <input type="submit" value="Удалить"/>
   </form>
 </div>
 </body>

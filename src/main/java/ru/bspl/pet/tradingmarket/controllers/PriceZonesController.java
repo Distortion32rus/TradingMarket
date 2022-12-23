@@ -22,13 +22,6 @@ public class PriceZonesController {
         this.priceZoneService = priceZoneService;
     }
 
-    /*@GetMapping()
-    public String show(Model model){
-        model.addAttribute("priceZones", priceZoneService.findAll());
-        model.addAttribute("header", "Список ценовых зон");
-        return "pricezones/index";
-    }*/
-
     @GetMapping()
     public String show(Model model,
                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page){
@@ -59,12 +52,12 @@ public class PriceZonesController {
         model.addAttribute("header", "Изменение ценовой зоны");
         return "pricezones/edit";
     }
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("priceZone") PriceZone priceZone, @PathVariable("id") Long id){
         priceZoneService.update(id, priceZone);
         return "redirect:/pricezones";
     }
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         priceZoneService.delete(id);
         return "redirect:/pricezones";

@@ -24,13 +24,6 @@ public class CounterpartyController {
         this.counterpartyService = counterpartyService;
     }
 
-    /*@GetMapping()
-    public String index(Model model){
-        model.addAttribute("counterparties", counterpartyService.findAll());
-        model.addAttribute("header", "Список поставщиков");
-        return "counterparties/index";
-    }*/
-
     @GetMapping()
     public String index(Model model,
                         @RequestParam(name="page", required = false, defaultValue = "0") Integer page){
@@ -64,12 +57,12 @@ public class CounterpartyController {
         model.addAttribute("header", "Изменение поставщика");
         return "counterparties/edit";
     }
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("counterparty") Counterparty counterparty, @PathVariable("id") Long id){
         counterpartyService.update(id, counterparty);
         return "redirect:/counterparties";
     }
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
         counterpartyService.delete(id);
         return "redirect:/counterparties";

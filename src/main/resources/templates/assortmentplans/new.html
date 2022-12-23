@@ -7,13 +7,18 @@
 <body class="text-bg-dark p-3">
 <div>
     <form th:method="POST" th:action="@{/assortmentplans}" th:object="${assortmentPlan}">
-        <label for="name">Enter name</label>
+        <label for="name">Введите наименование</label>
+        <br>
         <input type="text" th:field="*{name}" id="name"  name="name"/>
-        <label for="typeOfAssortmentPlans">Select type of assortment plans</label>
+        <br>
+        <label for="typeOfAssortmentPlans">Выберите тип ассортиментного плана</label>
+        <br>
         <select th:field="*{typeOfAssortmentPlans}" id="typeOfAssortmentPlans">
             <option th:each="typeOfAssortmentPlans : ${typesOfAssortmentPlans}" th:value="${typeOfAssortmentPlans.getId()}" th:name="typeOfAssortmentPlans" th:text="${typeOfAssortmentPlans.getName()}"></option>
         </select>
-        <input type="submit" value="Create!"/>
+        <br>
+        <br>
+        <input type="submit" value="Добавить"/>
     </form>
 </div>
 </body>
